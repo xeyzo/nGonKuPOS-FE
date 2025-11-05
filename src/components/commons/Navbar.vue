@@ -7,7 +7,7 @@ const isMobileMenuOpen = ref(false)
 <template>
 <nav class="relative bg-gray-900 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
   <div class="px-2 sm:px-6 lg:px-8">
-    <div class="relative flex h-16 items-center justify-between">
+    <div class="relative flex h-20 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
         <button type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
           <span class="absolute -inset-0.5"></span>
@@ -20,10 +20,10 @@ const isMobileMenuOpen = ref(false)
           </svg>
         </button>
       </div>
-      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+      <div class="flex flex-1 items-center justify-center sm:items-center sm:justify-start">
         <div class="flex shrink-0 items-center">
-          <a href="/" class="flex">
-            <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" class="h-8 w-auto" />
+          <a href="/" class="flex items-center">
+            <img src="@/assets/Gemini_Generated_Image_it7c11it7c11it7c.png" alt="NgonKu POS" class="h-12 w-auto" />
             <span class="ml-3 text-xl font-bold text-white">NgonKu POS</span>
           </a>
         </div>
