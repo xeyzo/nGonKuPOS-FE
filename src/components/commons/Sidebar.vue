@@ -1,6 +1,5 @@
 <template>
-  <!-- Backdrop -->
-  <div :class="sidebarOpen && !isLargeScreen ? 'block' : 'hidden'" class="fixed inset-0 bg-black opacity-50 z-20 lg:hidden"></div>
+  <div @click="$emit('toggle-sidebar')" :class="sidebarOpen && !isLargeScreen ? 'block' : 'hidden'" class="fixed inset-0 bg-black opacity-50 z-20 lg:hidden"></div>
 
   <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
          class="fixed inset-y-0 left-0 z-30 w-64 bg-gray-900 text-white min-h-screen p-4 transform transition-transform duration-300 ease-in-out lg:relative lg:inset-auto">
@@ -9,7 +8,7 @@
     </div>
     <h2 class="text-lg font-bold mb-4 text-center">NgonKu POS</h2>
     <nav class="flex flex-col space-y-2">
-      <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Dashboard</a>
+      <router-link to="/" class="block py-2 px-4 rounded hover:bg-gray-700">Dashboard</router-link>
       <div>
         <button @click="masterDataOpen = !masterDataOpen" class="w-full flex justify-between items-center py-2 px-4 rounded hover:bg-gray-700">
           <span>Master Data</span>
@@ -18,8 +17,8 @@
           </svg>
         </button>
         <div v-if="masterDataOpen" class="pl-4">
-          <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Products</a>
-          <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Categories</a>
+          <router-link to="/product" class="block py-2 px-4 rounded hover:bg-gray-700">Product</router-link>
+          <router-link to="/category" class="block py-2 px-4 rounded hover:bg-gray-700">Category</router-link>
         </div>
       </div>
       <div>
@@ -30,16 +29,16 @@
           </svg>
         </button>
         <div v-if="transactionDataOpen" class="pl-4">
-          <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Orders</a>
+          <router-link to="/order" class="block py-2 px-4 rounded hover:bg-gray-700">Order</router-link>
         </div>
       </div>
-      <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Settings</a>
     </nav>
   </aside>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
+import { useRoute } from 'vue-router';
 
 defineProps({
   sidebarOpen: {
@@ -56,7 +55,21 @@ defineEmits(['toggle-sidebar']);
 
 const masterDataOpen = ref(false);
 const transactionDataOpen = ref(false);
+
+const route = useRoute();
+
+watchEffect(() => {
+  if (route.meta.parent === 'Master Data') {
+    masterDataOpen.value = true;
+  } else if (route.meta.parent === 'Transaction') {
+    transactionDataOpen.value = true;
+  }
+});
+
 </script>
 
 <style scoped>
+.router-link-exact-active {
+  background-color: #4a5568;
+}
 </style>

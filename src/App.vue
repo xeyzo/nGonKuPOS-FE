@@ -12,9 +12,9 @@ const toggleSidebar = () => {
 
 const handleResize = () => {
   const newIsLargeScreen = window.innerWidth >= 1024;
-  if (newIsLargeScreen && !isLargeScreen.value) { // from small to large
+  if (newIsLargeScreen && !isLargeScreen.value) {
     sidebarOpen.value = true;
-  } else if (!newIsLargeScreen && isLargeScreen.value) { // from large to small
+  } else if (!newIsLargeScreen && isLargeScreen.value) {
     sidebarOpen.value = false;
   }
   isLargeScreen.value = newIsLargeScreen;
@@ -38,16 +38,11 @@ onUnmounted(() => {
     <div class="flex-1">
       <Navbar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
       <main class="p-4">
-        <h1 class="">You did it!</h1>
-        <p>
-          Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-          documentation
-        </p>
+        <router-view />
       </main>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* Styles are handled by Tailwind CSS classes */
 </style>

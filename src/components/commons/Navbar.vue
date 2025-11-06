@@ -10,7 +10,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <h1 class="text-lg font-bold ml-4">Dashboard</h1>
+        <h1 class="text-base sm:text-xl font-semibold ml-1 sm:ml-2 text-gray-800 uppercase tracking-wider">{{ uiStore.pageTitle }}</h1>
       </div>
       <div class="flex items-center space-x-4">
         <button class="p-2 rounded-full hover:bg-gray-200">
@@ -20,7 +20,7 @@
         </button>
         <div class="flex items-center">
           <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar" class="w-8 h-8 rounded-full" />
-          <span class="ml-2">John Doe</span>
+          <span class="ml-2 hidden sm:inline">John Doe</span>
         </div>
       </div>
     </div>
@@ -28,6 +28,8 @@
 </template>
 
 <script setup>
+import { useUiStore } from '@/stores/ui';
+
 defineProps({
   sidebarOpen: {
     type: Boolean,
@@ -35,6 +37,7 @@ defineProps({
   },
 });
 const emit = defineEmits(['toggle-sidebar']);
+const uiStore = useUiStore();
 </script>
 
 <style scoped>
