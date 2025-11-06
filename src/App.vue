@@ -36,7 +36,7 @@ onUnmounted(() => {
       <Sidebar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
     </div>
     <div class="flex-1">
-      <Navbar @toggle-sidebar="toggleSidebar" />
+      <Navbar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
       <main class="p-4">
         <h1 class="">You did it!</h1>
         <p>

@@ -1,0 +1,89 @@
+{
+  "status": 200,
+  "message": "Success",
+  "data": {
+    "content": [
+      {
+        "id": 10,
+        "name": "Camilan",
+        "description": "Aneka camilan ringan",
+        "picturePath": "",
+        "isActive": true
+      },
+      {
+        "id": 9,
+        "name": "Mainan",
+        "description": "Mainan anak-anak",
+        "picturePath": "",
+        "isActive": true
+      },
+      {
+        "id": 8,
+        "name": "Elektronik",
+        "description": "Peralatan elektronik kecil",
+        "picturePath": "",
+        "isActive": true
+      },
+      {
+        "id": 7,
+        "name": "Perawatan Diri",
+        "description": "Produk perawatan tubuh",
+        "picturePath": "",
+        "isActive": true
+      },
+      {
+        "id": 6,
+        "name": "ATK",
+        "description": "Alat tulis kantor",
+        "picturePath": "",
+        "isActive": true
+      },
+      {
+        "id": 5,
+        "name": "Kebersihan",
+        "description": "Produk kebersihan rumah",
+        "picturePath": "",
+        "isActive": true
+      },
+      {
+        "id": 4,
+        "name": "Sembako",
+        "description": "Bahan pokok dapur",
+        "picturePath": "",
+        "isActive": true
+      },
+      {
+        "id": 3,
+        "name": "Kue",
+        "description": "Kue dan roti manis",
+        "picturePath": "",
+        "isActive": true
+      },
+      {
+        "id": 2,
+        "name": "Minuman",
+        "description": "Minuman dingin dan panas",
+        "picturePath": "",
+        "isActive": true
+      },
+      {
+        "id": 1,
+        "name": "Makanan",
+        "description": "Makanan berat",
+        "picturePath": "",
+        "isActive": true
+      }
+    ],
+    "page": 0,
+    "size": 20,
+    "totalElements": 10,
+    "totalPages": 1,
+    "first": true,
+    "last": true,
+    "empty": false,
+    "sort": "id",
+    "direction": "desc"
+  },
+  "errors": null,
+  "timestamp": "2025-11-06T00:05:26.8112753"
+}

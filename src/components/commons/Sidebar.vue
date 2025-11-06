@@ -1,14 +1,13 @@
 <template>
   <!-- Backdrop -->
-  <div @click="$emit('toggle-sidebar')" :class="sidebarOpen && !isLargeScreen ? 'block' : 'hidden'" class="fixed inset-0 bg-black opacity-50 z-20 lg:hidden"></div>
+  <div :class="sidebarOpen && !isLargeScreen ? 'block' : 'hidden'" class="fixed inset-0 bg-black opacity-50 z-20 lg:hidden"></div>
 
   <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
          class="fixed inset-y-0 left-0 z-30 w-64 bg-gray-900 text-white min-h-screen p-4 transform transition-transform duration-300 ease-in-out lg:relative lg:inset-auto">
-    <div class="flex items-center justify-center">
-      <img src="@/assets/Gemini_Generated_Image_it7c11it7c11it7c.png" alt="NgonKu POS Logo" class="w-36 h-36" />
+    <div class="flex items-center justify-center mb-4">
+      <img src="@/assets/img/Gemini_Generated_Image_it7c11it7c11it7c.png" alt="NgonKu POS Logo" class="w-16 h-16" />
     </div>
     <h2 class="text-lg font-bold mb-4 text-center">NgonKu POS</h2>
-
     <nav class="flex flex-col space-y-2">
       <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Dashboard</a>
       <div>
@@ -34,6 +33,7 @@
           <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Orders</a>
         </div>
       </div>
+      <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Settings</a>
     </nav>
   </aside>
 </template>
@@ -56,7 +56,6 @@ defineEmits(['toggle-sidebar']);
 
 const masterDataOpen = ref(false);
 const transactionDataOpen = ref(false);
-
 </script>
 
 <style scoped>
