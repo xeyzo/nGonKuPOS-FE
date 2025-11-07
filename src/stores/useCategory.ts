@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 import allCategoriesData from '@/dummy/category.json'
 
@@ -8,6 +8,10 @@ export const useCategoryStore = defineStore('category', () => {
   const pageSize = ref(5)
 
   const allCategories = ref(allCategoriesData.data.content)
+
+  watch(search, () => {
+    currentPage.value = 1
+  })
 
   const filteredCategories = computed(() => {
     if (!search.value) {

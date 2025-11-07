@@ -33,6 +33,11 @@
         </div>
       </div>
     </nav>
+    <div class="absolute bottom-0 left-0 w-full p-4">
+      <p class="text-center text-xs text-gray-400">
+        &copy; 2025 dev nGon-Ku. All rights reserved.
+      </p>
+    </div>
   </aside>
 </template>
 
