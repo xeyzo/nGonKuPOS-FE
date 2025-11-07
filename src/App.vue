@@ -35,7 +35,7 @@ onUnmounted(() => {
     <div :class="sidebarOpen ? 'lg:w-64' : 'lg:w-0'" class="flex-shrink-0 transition-all duration-300 ease-in-out">
       <Sidebar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
     </div>
-    <div class="flex-1">
+    <div class="flex-1 transition-all duration-300 ease-in-out">
       <Navbar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
       <main class="p-4">
         <router-view />

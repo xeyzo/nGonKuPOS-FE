@@ -10,7 +10,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <h1 class="text-base sm:text-xl font-semibold ml-1 sm:ml-2 text-gray-800 uppercase tracking-wider">{{ uiStore.pageTitle }}</h1>
+        <h1 class="text-base sm:text-xl font-semibold ml-1 sm:ml-2 text-gray-800 uppercase tracking-wider truncate">{{ uiStore.pageTitle }}</h1>
       </div>
       <div class="flex items-center space-x-4">
         <button class="p-2 rounded-full hover:bg-gray-200">

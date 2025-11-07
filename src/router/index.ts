@@ -1,34 +1,29 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import { useUiStore } from '@/stores/ui'
 
-import HomeView from '../views/HomeView.vue'
-import ProductView from '../views/ProductView.vue'
-import OrderView from '../views/OrderView.vue'
-import CategoryView from '../views/CategoryView.vue'
-
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: HomeView,
+    component: () => import('../views/HomeView.vue'),
     meta: { title: 'Dashboard' },
   },
   {
     path: '/product',
     name: 'Product',
-    component: ProductView,
+    component: () => import('../views/ProductView.vue'),
     meta: { title: 'Product', parent: 'Master Data' },
   },
   {
     path: '/order',
     name: 'Order',
-    component: OrderView,
+    component: () => import('../views/OrderView.vue'),
     meta: { title: 'Order', parent: 'Transaction' },
   },
   {
     path: '/category',
     name: 'Category',
-    component: CategoryView,
+    component: () => import('../views/CategoryView.vue'),
     meta: { title: 'Category', parent: 'Master Data' },
   },
 ]
