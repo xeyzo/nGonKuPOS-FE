@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import Sidebar from './components/commons/Sidebar.vue';
-import Navbar from './components/commons/Navbar.vue';
+import TheSidebar from './components/commons/TheSidebar.vue';
+import TheNavbar from './components/commons/TheNavbar.vue';
+import { useUiStore } from './stores/ui';
+import { storeToRefs } from 'pinia';
 
 const sidebarOpen = ref(window.innerWidth >= 1024);
 const isLargeScreen = ref(window.innerWidth >= 1024);
+
+const uiStore = useUiStore();
+const { isModalOpen } = storeToRefs(uiStore);
 
 const toggleSidebar = () => {
   sidebarOpen.value = !sidebarOpen.value;
@@ -33,11 +38,11 @@ onUnmounted(() => {
 <template>
   <div class="relative min-h-screen lg:flex">
     <div :class="sidebarOpen ? 'lg:w-64' : 'lg:w-0'" class="flex-shrink-0 transition-all duration-300 ease-in-out">
-      <Sidebar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
+      <TheSidebar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
     </div>
     <div class="flex-1 transition-all duration-300 ease-in-out">
-      <Navbar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
-      <main class="p-4">
+      <TheNavbar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
+      <main :class="{ 'backdrop-blur-sm': isModalOpen }" class="p-4">
         <router-view />
       </main>
     </div>

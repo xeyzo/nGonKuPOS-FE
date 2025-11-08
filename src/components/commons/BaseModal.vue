@@ -18,14 +18,22 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue';
+import { useUiStore } from '@/stores/ui';
+
 const props = defineProps<{
   show: boolean;
   title?: string;
 }>();
 
 const emit = defineEmits(['close']);
+const uiStore = useUiStore();
 
 const close = () => {
   emit('close');
 };
+
+watch(() => props.show, (newVal) => {
+  uiStore.setModalOpen(newVal);
+});
 </script>
