@@ -124,20 +124,11 @@ const handleSubmitForm = (formData: Category) => {
   if (formData.id) {
     // This is an update operation
     console.log('Updating category:', formData);
-    const index = categoryStore.categories.findIndex(cat => cat.id === formData.id);
-    if (index !== -1) {
-      categoryStore.categories[index] = formData;
-      categoryStore.filterCategories();
-    }
+    categoryStore.updateCategory(formData);
   } else {
     // This is an add operation
-    const categoryWithId: Category = {
-      id: Math.floor(Math.random() * 100000), // Dummy ID
-      ...formData,
-    };
-    console.log('Adding category:', categoryWithId);
-    categoryStore.categories.push(categoryWithId);
-    categoryStore.filterCategories();
+    console.log('Adding category:', formData);
+    categoryStore.addCategory(formData);
   }
   closeFormModal();
 };
