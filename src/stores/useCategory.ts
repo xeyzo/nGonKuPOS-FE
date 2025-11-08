@@ -8,12 +8,15 @@ interface Category {
   description?: string;
 }
 
+const LOCAL_STORAGE_KEY = 'categories';
+
 export const useCategoryStore = defineStore('category', () => {
   const search = ref('')
   const currentPage = ref(1)
   const pageSize = ref(5)
 
-  const allCategories = ref<Category[]>(allCategoriesData.data.content)
+  // Load categories from local storage or fallback to dummy data
+  const allCategories = ref<Category[]>(loadCategoriesFromLocalStorage());
 
   // Modal State
   const showFormModal = ref(false);
@@ -46,12 +49,31 @@ export const useCategoryStore = defineStore('category', () => {
     currentPage.value = page
   }
 
+  function saveCategoriesToLocalStorage() {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allCategories.value));
+  }
+
+  function loadCategoriesFromLocalStorage(): Category[] {
+    const storedCategories = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedCategories) {
+      try {
+        return JSON.parse(storedCategories);
+      } catch (e) {
+        console.error("Error parsing categories from localStorage", e);
+        // Fallback to dummy data if parsing fails
+        return allCategoriesData.data.content;
+      }
+    }
+    return allCategoriesData.data.content;
+  }
+
   function addCategory(newCategory: Category) {
     const categoryWithId: Category = {
       id: Math.floor(Math.random() * 100000),
       ...newCategory,
     };
     allCategories.value.push(categoryWithId);
+    saveCategoriesToLocalStorage();
     filterCategories();
   }
 
@@ -59,8 +81,15 @@ export const useCategoryStore = defineStore('category', () => {
     const index = allCategories.value.findIndex(cat => cat.id === updatedCategory.id);
     if (index !== -1) {
       allCategories.value[index] = updatedCategory;
+      saveCategoriesToLocalStorage();
       filterCategories();
     }
+  }
+
+  function deleteCategory(id: number) {
+    allCategories.value = allCategories.value.filter(category => category.id !== id);
+    saveCategoriesToLocalStorage();
+    filterCategories();
   }
 
   function filterCategories() {
@@ -105,6 +134,7 @@ export const useCategoryStore = defineStore('category', () => {
     setCurrentPage,
     addCategory,
     updateCategory,
+    deleteCategory, // Expose delete action
     filterCategories,
     // Expose modal state and actions
     showFormModal,
