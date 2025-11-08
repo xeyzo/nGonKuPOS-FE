@@ -15,6 +15,10 @@ export const useCategoryStore = defineStore('category', () => {
 
   const allCategories = ref<Category[]>(allCategoriesData.data.content)
 
+  // Modal State
+  const showFormModal = ref(false);
+  const selectedCategory = ref<Category | null>(null);
+
   watch(search, () => {
     currentPage.value = 1
   })
@@ -43,45 +47,56 @@ export const useCategoryStore = defineStore('category', () => {
   }
 
   function addCategory(newCategory: Category) {
-    console.log('useCategoryStore: Adding new category:', newCategory);
-    // Assign a dummy ID for now, in a real app this would come from the backend
     const categoryWithId: Category = {
       id: Math.floor(Math.random() * 100000),
       ...newCategory,
     };
     allCategories.value.push(categoryWithId);
-    console.log('useCategoryStore: allCategories after add:', allCategories.value);
     filterCategories();
   }
 
   function updateCategory(updatedCategory: Category) {
-    console.log('useCategoryStore: Updating category:', updatedCategory);
     const index = allCategories.value.findIndex(cat => cat.id === updatedCategory.id);
     if (index !== -1) {
       allCategories.value[index] = updatedCategory;
-      console.log('useCategoryStore: allCategories after update:', allCategories.value);
       filterCategories();
-    } else {
-      console.log('useCategoryStore: Category not found for update:', updatedCategory);
     }
   }
 
-  // This function is already implicitly called by computed properties,
-  // but we can make it explicit if needed for external triggers.
   function filterCategories() {
-    console.log('useCategoryStore: filterCategories called. Triggering re-evaluation of computed properties.');
     // Trigger re-evaluation of computed properties
-    // By simply accessing filteredCategories, it will re-evaluate
-    // Or, if we want to force a refresh of the current page, we can do:
-    // currentPage.value = 1;
   }
 
+  // Modal Actions
+  function openAddModal() {
+    selectedCategory.value = null;
+    showFormModal.value = true;
+  }
+
+  function openEditModal(category: Category) {
+    selectedCategory.value = category;
+    showFormModal.value = true;
+  }
+
+  function closeFormModal() {
+    showFormModal.value = false;
+    selectedCategory.value = null;
+  }
+
+  function handleSubmitForm(formData: Category) {
+    if (formData.id) {
+      updateCategory(formData);
+    } else {
+      addCategory(formData);
+    }
+    closeFormModal();
+  }
 
   return {
     search,
     currentPage,
     pageSize,
-    allCategories, // Expose allCategories for direct manipulation if needed, though actions are preferred
+    allCategories,
     totalCategories,
     totalPages,
     paginatedCategories,
@@ -89,5 +104,12 @@ export const useCategoryStore = defineStore('category', () => {
     addCategory,
     updateCategory,
     filterCategories,
+    // Expose modal state and actions
+    showFormModal,
+    selectedCategory,
+    openAddModal,
+    openEditModal,
+    closeFormModal,
+    handleSubmitForm,
   }
 })
