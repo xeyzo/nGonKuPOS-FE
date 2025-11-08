@@ -64,7 +64,9 @@ export const useCategoryStore = defineStore('category', () => {
   }
 
   function filterCategories() {
-    // Trigger re-evaluation of computed properties
+    // Accessing filteredCategories here will trigger its re-evaluation
+    // This is important to ensure the view updates
+    filteredCategories.value;
   }
 
   // Modal Actions

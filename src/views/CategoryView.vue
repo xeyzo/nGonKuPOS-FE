@@ -85,13 +85,16 @@
         />
       </div>
     
-      <CategoryFormModal :show="categoryStore.showFormModal" :category="categoryStore.selectedCategory" @close="categoryStore.closeFormModal" @submit-form="categoryStore.handleSubmitForm" />
+      <CategoryFormModal :show="showFormModal" :category="selectedCategory" @close="categoryStore.closeFormModal" @submit-form="categoryStore.handleSubmitForm" />
     </template>
     
     <script setup lang="ts">
     import { useCategoryStore } from '@/stores/useCategory';
     import Pagination from '@/components/commons/Pagination.vue';
     import CategoryFormModal from '@/components/category/CategoryFormModal.vue';
+    import { storeToRefs } from 'pinia';
     
     const categoryStore = useCategoryStore();
+    
+    const { showFormModal, selectedCategory } = storeToRefs(categoryStore);
     </script>
