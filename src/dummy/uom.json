@@ -1,0 +1,42 @@
+{
+  "status": 200,
+  "message": "Success",
+  "data": {
+    "content": [
+      {
+        "id": 1,
+        "code": "PCS",
+        "name": "Pieces",
+        "description": "Unit for individual items.",
+        "symbol": "pcs",
+        "isActive": true
+      },
+      {
+        "id": 2,
+        "code": "KG",
+        "name": "Kilogram",
+        "description": "Unit for weight.",
+        "symbol": "kg",
+        "isActive": true
+      },
+      {
+        "id": 3,
+        "code": "BOX",
+        "name": "Box",
+        "description": "Unit for a box of items.",
+        "symbol": "box",
+        "isActive": true
+      },
+      {
+        "id": 4,
+        "code": "LTR",
+        "name": "Liter",
+        "description": "Unit for volume.",
+        "symbol": "ltr",
+        "isActive": false
+      }
+    ]
+  },
+  "errors": null,
+  "timestamp": "2025-11-06T22:26:52.8873206"
+}

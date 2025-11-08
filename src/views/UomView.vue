@@ -7,30 +7,30 @@
         </span>
         <input
           type="text"
-          v-model="categoryStore.search"
-          placeholder="Search Category"
+          v-model="uomStore.search"
+          placeholder="Search UoM"
           class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
         />
       </div>
       <button class="bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 w-full sm:w-auto">
-        New Item
+        New UoM
       </button>
     </div>
     <div class="overflow-x-auto rounded-t-lg hidden sm:block">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-800">
           <tr>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Category Code</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Category Name</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Category Sequence</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">UoM Code</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">UoM Name</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">UoM Symbol</th>
             <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-200 uppercase tracking-wider">Action</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200 border-t border-gray-200">
-          <tr v-for="(category, index) in categoryStore.paginatedCategories" :key="category.id" class="hover:bg-gray-50">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ category.id }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ category.name }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ (categoryStore.currentPage - 1) * categoryStore.pageSize + index + 1 }}</td>
+          <tr v-for="uom in uomStore.paginatedUoms" :key="uom.id" class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ uom.code }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ uom.name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ uom.symbol }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
               <button class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -51,13 +51,13 @@
       </table>
     </div>
     <div class="sm:hidden">
-      <div v-for="(category, index) in categoryStore.paginatedCategories" :key="category.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
+      <div v-for="uom in uomStore.paginatedUoms" :key="uom.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
         <div class="flex justify-between items-center mb-2">
-          <span class="font-bold text-gray-800">{{ category.name }}</span>
-          <span class="text-sm text-gray-500">#{{ category.id }}</span>
+          <span class="font-bold text-gray-800">{{ uom.name }}</span>
+          <span class="text-sm text-gray-500">#{{ uom.code }}</span>
         </div>
         <div class="text-sm text-gray-600 mb-4">
-          Sequence: {{ (categoryStore.currentPage - 1) * categoryStore.pageSize + index + 1 }}
+          Symbol: {{ uom.symbol }}
         </div>
         <div class="flex justify-end">
           <button class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
@@ -77,18 +77,18 @@
       </div>
     </div>
     <Pagination
-      :current-page="categoryStore.currentPage"
-      :total-pages="categoryStore.totalPages"
-      :total-items="categoryStore.totalCategories"
-      :page-size="categoryStore.pageSize"
-      @page-changed="categoryStore.setCurrentPage"
+      :current-page="uomStore.currentPage"
+      :total-pages="uomStore.totalPages"
+      :total-items="uomStore.totalUoms"
+      :page-size="uomStore.pageSize"
+      @page-changed="uomStore.setCurrentPage"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useCategoryStore } from '@/stores/useCategory';
+import { useUomStore } from '@/stores/useUom';
 import Pagination from '@/components/commons/Pagination.vue';
 
-const categoryStore = useCategoryStore();
+const uomStore = useUomStore();
 </script>

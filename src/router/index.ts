@@ -26,6 +26,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/CategoryView.vue'),
     meta: { title: 'Category', parent: 'Master Data' },
   },
+  {
+    path: '/uom',
+    name: 'UoM',
+    component: () => import('../views/UomView.vue'),
+    meta: { title: 'UoM', parent: 'Master Data' },
+  },
 ]
 
 const router = createRouter({

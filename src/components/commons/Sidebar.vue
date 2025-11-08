@@ -19,6 +19,7 @@
         <div v-if="masterDataOpen" class="pl-4">
           <router-link to="/product" class="block py-2 px-4 rounded hover:bg-gray-700">Product</router-link>
           <router-link to="/category" class="block py-2 px-4 rounded hover:bg-gray-700">Category</router-link>
+          <router-link to="/uom" class="block py-2 px-4 rounded hover:bg-gray-700">UoM</router-link>
         </div>
       </div>
       <div>
