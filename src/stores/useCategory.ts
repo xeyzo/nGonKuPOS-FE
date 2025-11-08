@@ -43,28 +43,33 @@ export const useCategoryStore = defineStore('category', () => {
   }
 
   function addCategory(newCategory: Category) {
+    console.log('useCategoryStore: Adding new category:', newCategory);
     // Assign a dummy ID for now, in a real app this would come from the backend
     const categoryWithId: Category = {
       id: Math.floor(Math.random() * 100000),
       ...newCategory,
     };
     allCategories.value.push(categoryWithId);
-    // After adding, we might want to go to the last page or the first page
-    // For simplicity, let's just ensure the list is re-filtered
+    console.log('useCategoryStore: allCategories after add:', allCategories.value);
     filterCategories();
   }
 
   function updateCategory(updatedCategory: Category) {
+    console.log('useCategoryStore: Updating category:', updatedCategory);
     const index = allCategories.value.findIndex(cat => cat.id === updatedCategory.id);
     if (index !== -1) {
       allCategories.value[index] = updatedCategory;
+      console.log('useCategoryStore: allCategories after update:', allCategories.value);
       filterCategories();
+    } else {
+      console.log('useCategoryStore: Category not found for update:', updatedCategory);
     }
   }
 
   // This function is already implicitly called by computed properties,
   // but we can make it explicit if needed for external triggers.
   function filterCategories() {
+    console.log('useCategoryStore: filterCategories called. Triggering re-evaluation of computed properties.');
     // Trigger re-evaluation of computed properties
     // By simply accessing filteredCategories, it will re-evaluate
     // Or, if we want to force a refresh of the current page, we can do:

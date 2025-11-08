@@ -39,23 +39,26 @@ const formData = ref<Category>({ name: '', description: '' });
 const isEditing = computed(() => !!props.category && props.category.id !== undefined);
 
 watch(() => props.show, (newVal) => {
+  console.log('CategoryFormModal: show prop changed to', newVal);
   if (newVal) {
     if (props.category) {
-      // Editing existing category
+      console.log('CategoryFormModal: Initializing form for editing with category:', props.category);
       formData.value = { ...props.category };
     } else {
-      // Adding new category
+      console.log('CategoryFormModal: Initializing form for adding new category.');
       formData.value = { name: '', description: '' };
     }
   }
 }, { immediate: true }); // immediate: true to run on initial render if show is true
 
 const submitForm = () => {
+  console.log('CategoryFormModal: Submitting form with data:', formData.value);
   emit('submit-form', { ...formData.value });
   // No need to call close() here, BaseModal will emit close after form submission
 };
 
 const close = () => {
+  console.log('CategoryFormModal: Emitting close event.');
   emit('close');
 };
 </script>

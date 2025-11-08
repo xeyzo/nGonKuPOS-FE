@@ -106,28 +106,32 @@ const showFormModal = ref(false);
 const selectedCategory = ref<Category | null>(null);
 
 const openAddModal = () => {
+  console.log('CategoryView: Opening Add Modal');
   selectedCategory.value = null; // Ensure no category is selected for add operation
   showFormModal.value = true;
 };
 
 const openEditModal = (category: Category) => {
+  console.log('CategoryView: Opening Edit Modal for category:', category);
   selectedCategory.value = category;
   showFormModal.value = true;
 };
 
 const closeFormModal = () => {
+  console.log('CategoryView: Closing Form Modal');
   showFormModal.value = false;
   selectedCategory.value = null; // Clear selected category on close
 };
 
 const handleSubmitForm = (formData: Category) => {
+  console.log('CategoryView: Handling form submission with data:', formData);
   if (formData.id) {
     // This is an update operation
-    console.log('Updating category:', formData);
+    console.log('CategoryView: Calling updateCategory with:', formData);
     categoryStore.updateCategory(formData);
   } else {
     // This is an add operation
-    console.log('Adding category:', formData);
+    console.log('CategoryView: Calling addCategory with:', formData);
     categoryStore.addCategory(formData);
   }
   closeFormModal();
