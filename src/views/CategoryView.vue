@@ -85,71 +85,61 @@
     />
   </div>
 
-  <CategoryAddModal :show="showAddModal" @close="closeAddModal" @add-category="handleAddCategory" />
-  <CategoryEditModal :show="showEditModal" :category="selectedCategory" @close="closeEditModal" @update-category="handleUpdateCategory" />
-
+  <CategoryFormModal :show="showFormModal" :category="selectedCategory" @close="closeFormModal" @submit-form="handleSubmitForm" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useCategoryStore } from '@/stores/useCategory';
 import Pagination from '@/components/commons/Pagination.vue';
-import CategoryAddModal from '@/components/category/CategoryAddModal.vue';
-import CategoryEditModal from '@/components/category/CategoryEditModal.vue';
+import CategoryFormModal from '@/components/category/CategoryFormModal.vue';
 
 interface Category {
-  id: number;
+  id?: number;
   name: string;
   description?: string;
 }
 
 const categoryStore = useCategoryStore();
 
-const showAddModal = ref(false);
-const showEditModal = ref(false);
+const showFormModal = ref(false);
 const selectedCategory = ref<Category | null>(null);
 
 const openAddModal = () => {
-  showAddModal.value = true;
-};
-
-const closeAddModal = () => {
-  showAddModal.value = false;
+  selectedCategory.value = null; // Ensure no category is selected for add operation
+  showFormModal.value = true;
 };
 
 const openEditModal = (category: Category) => {
   selectedCategory.value = category;
-  showEditModal.value = true;
+  showFormModal.value = true;
 };
 
-const closeEditModal = () => {
-  showEditModal.value = false;
-  selectedCategory.value = null;
+const closeFormModal = () => {
+  showFormModal.value = false;
+  selectedCategory.value = null; // Clear selected category on close
 };
 
-const handleAddCategory = (newCategory: { name: string; description?: string }) => {
-  // Simulate adding a category with a dummy ID
-  const categoryWithId: Category = {
-    id: Math.floor(Math.random() * 100000), // Dummy ID
-    ...newCategory,
-  };
-  console.log('Adding category:', categoryWithId);
-  // In a real application, you would call an API here
-  // For now, let's manually add it to the store for display purposes
-  categoryStore.categories.push(categoryWithId);
-  categoryStore.filterCategories(); // Re-filter to update pagination
-  closeAddModal();
-};
-
-const handleUpdateCategory = (updatedCategory: Category) => {
-  console.log('Updating category:', updatedCategory);
-  // In a real application, you would call an API here
-  // For now, let's manually update it in the store for display purposes
-  const index = categoryStore.categories.findIndex(cat => cat.id === updatedCategory.id);
-  if (index !== -1) {
-    categoryStore.categories[index] = updatedCategory;
-    categoryStore.filterCategories(); // Re-filter to update pagination
+const handleSubmitForm = (formData: Category) => {
+  if (formData.id) {
+    // This is an update operation
+    console.log('Updating category:', formData);
+    const index = categoryStore.categories.findIndex(cat => cat.id === formData.id);
+    if (index !== -1) {
+      categoryStore.categories[index] = formData;
+      categoryStore.filterCategories();
+    }
+  } else {
+    // This is an add operation
+    const categoryWithId: Category = {
+      id: Math.floor(Math.random() * 100000), // Dummy ID
+      ...formData,
+    };
+    console.log('Adding category:', categoryWithId);
+    categoryStore.categories.push(categoryWithId);
+    categoryStore.filterCategories();
   }
-  closeEditModal();
+  closeFormModal();
 };
 </script>
+
