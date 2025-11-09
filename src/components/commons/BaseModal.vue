@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, onMounted, onUnmounted } from 'vue';
+import { watch, onUnmounted } from 'vue';
 import { useUiStore } from '@/stores/ui';
 
 const props = defineProps<{
