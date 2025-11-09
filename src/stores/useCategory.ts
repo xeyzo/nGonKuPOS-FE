@@ -68,13 +68,13 @@ export const useCategoryStore = defineStore('category', () => {
   }
 
   function addCategory(newCategory: Category) {
+    const maxId = allCategories.value.reduce((max, category) => (category.id && category.id > max ? category.id : max), 0);
     const categoryWithId: Category = {
-      id: Math.floor(Math.random() * 100000),
+      id: maxId + 1,
       ...newCategory,
     };
     allCategories.value.push(categoryWithId);
     saveCategoriesToLocalStorage();
-    filterCategories();
   }
 
   function updateCategory(updatedCategory: Category) {
@@ -82,20 +82,12 @@ export const useCategoryStore = defineStore('category', () => {
     if (index !== -1) {
       allCategories.value[index] = updatedCategory;
       saveCategoriesToLocalStorage();
-      filterCategories();
     }
   }
 
   function deleteCategory(id: number) {
     allCategories.value = allCategories.value.filter(category => category.id !== id);
     saveCategoriesToLocalStorage();
-    filterCategories();
-  }
-
-  function filterCategories() {
-    // Accessing filteredCategories here will trigger its re-evaluation
-    // This is important to ensure the view updates
-    filteredCategories.value;
   }
 
   // Modal Actions
@@ -135,7 +127,6 @@ export const useCategoryStore = defineStore('category', () => {
     addCategory,
     updateCategory,
     deleteCategory, // Expose delete action
-    filterCategories,
     // Expose modal state and actions
     showFormModal,
     selectedCategory,

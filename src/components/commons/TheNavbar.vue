@@ -27,7 +27,7 @@
   </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useUiStore } from '@/stores/ui';
 
 defineProps({
@@ -36,7 +36,6 @@ defineProps({
     required: true,
   },
 });
-const emit = defineEmits(['toggle-sidebar']);
 const uiStore = useUiStore();
 </script>
 

@@ -1,6 +1,6 @@
 <template>
-  <div v-if="show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" @click.self="close">
-    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-auto">
+  <div v-if="show" class="fixed inset-0 flex items-center justify-center z-[9999]" @click.self="close">
+    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-auto my-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
       <div class="flex justify-between items-center border-b pb-3 mb-4">
         <slot name="header">
           <h3 class="text-xl font-semibold text-gray-800">{{ title }}</h3>
@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue';
+import { watch, onMounted, onUnmounted } from 'vue';
 import { useUiStore } from '@/stores/ui';
 
 const props = defineProps<{
@@ -33,7 +33,22 @@ const close = () => {
   emit('close');
 };
 
+const handleKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Escape' && props.show) {
+    close();
+  }
+};
+
 watch(() => props.show, (newVal) => {
   uiStore.setModalOpen(newVal);
+  if (newVal) {
+    window.addEventListener('keydown', handleKeydown);
+  } else {
+    window.removeEventListener('keydown', handleKeydown);
+  }
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
 });
 </script>

@@ -41,10 +41,8 @@ onUnmounted(() => {
       <TheSidebar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
     </div>
     <div class="flex-1 transition-all duration-300 ease-in-out">
-      <TheNavbar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
-      <main :class="{ 'backdrop-blur-sm': isModalOpen }" class="p-4">
+      <TheNavbar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />     
         <router-view />
-      </main>
     </div>
   </div>
 </template>

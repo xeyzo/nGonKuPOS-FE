@@ -12,8 +12,8 @@
           class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
         />
       </div>
-      <button class="bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 w-full sm:w-auto">
-        New Product
+      <button @click="productStore.openAddModal" class="bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 w-full sm:w-auto">
+        Add Product
       </button>
     </div>
     <div class="overflow-x-auto rounded-t-lg hidden sm:block">
@@ -36,14 +36,14 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatPrice(product.salePrice) }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.stock }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-              <button class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
+              <button @click="productStore.openEditModal(product)" class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                   <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
                 </svg>
                 Edit
               </button>
-              <button class="text-red-600 hover:text-red-900 inline-flex items-center">
+              <button @click="confirmDelete(product.id)" class="text-red-600 hover:text-red-900 inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
                 </svg>
@@ -76,14 +76,14 @@
                 </div>
             </div>
             <div class="flex justify-end">
-                <button class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
+                <button @click="productStore.openEditModal(product)" class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                         <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
                     </svg>
                     Edit
                 </button>
-                <button class="text-red-600 hover:text-red-900 inline-flex items-center">
+                <button @click="confirmDelete(product.id)" class="text-red-600 hover:text-red-900 inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
                     </svg>
@@ -92,7 +92,7 @@
             </div>
         </div>
     </div>
-    <Pagination
+    <ThePagination
       :current-page="productStore.currentPage"
       :total-pages="productStore.totalPages"
       :total-items="productStore.totalProducts"
@@ -100,12 +100,25 @@
       @page-changed="productStore.setCurrentPage"
     />
   </div>
+
+  <ProductFormModal :show="showFormModal" :product="selectedProduct" @close="productStore.closeFormModal" @submit-form="productStore.handleSubmitForm" />
 </template>
 
 <script setup lang="ts">
 import { useProductStore } from '@/stores/useProduct';
-import Pagination from '@/components/commons/Pagination.vue';
+import ThePagination from '@/components/commons/ThePagination.vue';
+import ProductFormModal from '@/components/product/ProductFormModal.vue'; // Import the new modal
 import { formatPrice } from '@/utils/format';
+import { storeToRefs } from 'pinia'; // Import storeToRefs
 
 const productStore = useProductStore();
+
+// Destructure state properties from the store to maintain reactivity
+const { showFormModal, selectedProduct } = storeToRefs(productStore);
+
+const confirmDelete = (id: number | undefined) => {
+  if (id !== undefined && confirm('Are you sure you want to delete this product?')) {
+    productStore.deleteProduct(id);
+  }
+};
 </script>

@@ -76,7 +76,7 @@
         </div>
       </div>
     </div>
-    <Pagination
+    <ThePagination
       :current-page="uomStore.currentPage"
       :total-pages="uomStore.totalPages"
       :total-items="uomStore.totalUoms"
@@ -88,7 +88,7 @@
 
 <script setup lang="ts">
 import { useUomStore } from '@/stores/useUom';
-import Pagination from '@/components/commons/Pagination.vue';
+import ThePagination from '@/components/commons/ThePagination.vue';
 
 const uomStore = useUomStore();
 </script>

@@ -76,7 +76,7 @@
             </div>
           </div>
         </div>
-        <Pagination
+        <ThePagination
           :current-page="categoryStore.currentPage"
           :total-pages="categoryStore.totalPages"
           :total-items="categoryStore.totalCategories"
@@ -90,7 +90,7 @@
     
     <script setup lang="ts">
     import { useCategoryStore } from '@/stores/useCategory';
-    import Pagination from '@/components/commons/Pagination.vue';
+    import ThePagination from '@/components/commons/ThePagination.vue';
     import CategoryFormModal from '@/components/category/CategoryFormModal.vue';
     import { storeToRefs } from 'pinia';
     
