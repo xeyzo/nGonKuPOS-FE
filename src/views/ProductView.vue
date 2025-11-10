@@ -43,7 +43,7 @@
                 </svg>
                 Edit
               </button>
-              <button @click="confirmDelete(product.id)" class="text-red-600 hover:text-red-900 inline-flex items-center">
+              <button @click="handleDelete(product)" class="text-red-600 hover:text-red-900 inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
                 </svg>
@@ -83,7 +83,7 @@
                     </svg>
                     Edit
                 </button>
-                <button @click="confirmDelete(product.id)" class="text-red-600 hover:text-red-900 inline-flex items-center">
+                <button @click="handleDelete(product)" class="text-red-600 hover:text-red-900 inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
                     </svg>
@@ -106,19 +106,36 @@
 
 <script setup lang="ts">
 import { useProductStore } from '@/stores/useProduct';
+import { useUiStore } from '@/stores/ui';
 import ThePagination from '@/components/commons/ThePagination.vue';
-import ProductFormModal from '@/components/product/ProductFormModal.vue'; // Import the new modal
+import ProductFormModal from '@/components/product/ProductFormModal.vue';
 import { formatPrice } from '@/utils/format';
-import { storeToRefs } from 'pinia'; // Import storeToRefs
+import { storeToRefs } from 'pinia';
+
+interface Product {
+  id?: number;
+  barcode: string;
+  name: string;
+  description?: string;
+  costPrice: number;
+  salePrice: number;
+  stock: number;
+  picturePath?: string;
+  isActive: boolean;
+  uomId?: number;
+  categoryId?: number;
+}
 
 const productStore = useProductStore();
+const uiStore = useUiStore();
 
-// Destructure state properties from the store to maintain reactivity
 const { showFormModal, selectedProduct } = storeToRefs(productStore);
 
-const confirmDelete = (id: number | undefined) => {
-  if (id !== undefined && confirm('Are you sure you want to delete this product?')) {
-    productStore.deleteProduct(id);
-  }
+const handleDelete = (product: Product) => {
+  uiStore.openDeleteConfirmationModal(
+    'Delete Product',
+    `Are you sure you want to delete ${product.name}?`,
+    () => productStore.deleteProduct(product.id!)
+  );
 };
 </script>

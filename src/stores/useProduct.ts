@@ -12,8 +12,8 @@ interface Product {
   stock: number;
   picturePath?: string;
   isActive: boolean;
-  uomId?: number;
-  categoryId?: number;
+  uomId?: number | null;
+  categoryId?: number | null;
 }
 
 const LOCAL_STORAGE_KEY = 'products';
@@ -118,7 +118,8 @@ export const useProductStore = defineStore('product', () => {
   function handleSubmitForm(formData: Product) {
     if (formData.id) {
       updateProduct(formData);
-    } else {
+    }
+    else {
       addProduct(formData);
     }
     closeFormModal();

@@ -36,14 +36,14 @@
       <div class="form-group">
         <label for="uom">Unit of Measure:</label>
         <select id="uom" v-model.number="formData.uomId">
-          <option value="">Select UOM</option>
+          <option :value="null">Select UOM</option>
           <option v-for="uom in uomStore.allUoms" :key="uom.id" :value="uom.id">{{ uom.name }}</option>
         </select>
       </div>
       <div class="form-group">
         <label for="category">Category:</label>
         <select id="category" v-model.number="formData.categoryId">
-          <option value="">Select Category</option>
+          <option :value="null">Select Category</option>
           <option v-for="category in categoryStore.allCategories" :key="category.id" :value="category.id">{{ category.name }}</option>
         </select>
       </div>
@@ -75,8 +75,8 @@ interface Product {
   stock: number;
   picturePath?: string;
   isActive: boolean;
-  uomId?: number;
-  categoryId?: number;
+  uomId?: number | null;
+  categoryId?: number | null;
 }
 
 const props = defineProps<{
@@ -98,8 +98,8 @@ const formData = ref<Product>({
   stock: 0,
   picturePath: '',
   isActive: true,
-  uomId: undefined,
-  categoryId: undefined,
+  uomId: null,
+  categoryId: null,
 });
 
 const isEditing = computed(() => !!props.product && props.product.id !== undefined);
@@ -118,8 +118,8 @@ watch(() => props.show, (newVal) => {
         stock: 0,
         picturePath: '',
         isActive: true,
-        uomId: undefined,
-        categoryId: undefined,
+        uomId: null,
+        categoryId: null,
       };
     }
   }
@@ -138,8 +138,8 @@ watch(() => props.product, (newVal) => {
       stock: 0,
       picturePath: '',
       isActive: true,
-      uomId: undefined,
-      categoryId: undefined,
+      uomId: null,
+      categoryId: null,
     };
   }
 });
@@ -178,7 +178,7 @@ select {
 
 textarea {
   resize: vertical;
-  min-height: 80px;
+  height: 80px;
 }
 
 .btn {

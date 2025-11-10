@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import TheSidebar from './components/commons/TheSidebar.vue';
 import TheNavbar from './components/commons/TheNavbar.vue';
+import DeleteConfirmationModal from './components/commons/DeleteConfirmationModal.vue';
 import { useUiStore } from './stores/ui';
 import { storeToRefs } from 'pinia';
 
@@ -9,7 +10,12 @@ const sidebarOpen = ref(window.innerWidth >= 1024);
 const isLargeScreen = ref(window.innerWidth >= 1024);
 
 const uiStore = useUiStore();
-const { isModalOpen } = storeToRefs(uiStore);
+const { 
+  isModalOpen, 
+  isDeleteConfirmationModalOpen, 
+  deleteConfirmationTitle, 
+  deleteConfirmationMessage 
+} = storeToRefs(uiStore);
 
 const toggleSidebar = () => {
   sidebarOpen.value = !sidebarOpen.value;
@@ -40,6 +46,13 @@ window.addEventListener('resize', handleResize);
         <router-view />
       </main>
     </div>
+    <DeleteConfirmationModal
+      :show="isDeleteConfirmationModalOpen"
+      :title="deleteConfirmationTitle"
+      :message="deleteConfirmationMessage"
+      @close="uiStore.closeDeleteConfirmationModal"
+      @confirm="uiStore.confirmDelete"
+    />
   </div>
 </template>
 

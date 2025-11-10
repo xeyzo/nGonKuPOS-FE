@@ -91,6 +91,7 @@ export const useUomStore = defineStore('uom', () => {
   }
 
   return {
+    allUoms,
     search,
     currentPage,
     pageSize,

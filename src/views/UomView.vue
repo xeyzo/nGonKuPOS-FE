@@ -39,7 +39,7 @@
                 </svg>
                 Edit
               </button>
-              <button @click="handleDelete(uom.id!)" class="text-red-600 hover:text-red-900 inline-flex items-center">
+              <button @click="handleDelete(uom)" class="text-red-600 hover:text-red-900 inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
                 </svg>
@@ -67,7 +67,7 @@
             </svg>
             Edit
           </button>
-          <button @click="handleDelete(uom.id!)" class="text-red-600 hover:text-red-900 inline-flex items-center">
+          <button @click="handleDelete(uom)" class="text-red-600 hover:text-red-900 inline-flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
             </svg>
@@ -94,11 +94,13 @@
 
 <script setup lang="ts">
 import { useUomStore } from '@/stores/useUom';
+import { useUiStore } from '@/stores/ui';
 import ThePagination from '@/components/commons/ThePagination.vue';
 import UomFormModal from '@/components/uom/UomFormModal.vue';
 import type { Uom } from '@/components/uom/UomFormModal.vue';
 
 const uomStore = useUomStore();
+const uiStore = useUiStore();
 
 const handleFormSubmit = (uom: Uom) => {
   if (uom.id) {
@@ -108,9 +110,11 @@ const handleFormSubmit = (uom: Uom) => {
   }
 };
 
-const handleDelete = (uomId: number) => {
-  if (confirm('Are you sure you want to delete this UoM?')) {
-    uomStore.deleteUom(uomId);
-  }
+const handleDelete = (uom: Uom) => {
+  uiStore.openDeleteConfirmationModal(
+    'Delete UoM',
+    `Are you sure you want to delete ${uom.name}?`,
+    () => uomStore.deleteUom(uom.id!)
+  );
 };
 </script>
