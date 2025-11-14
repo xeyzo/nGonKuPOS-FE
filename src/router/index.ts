@@ -21,6 +21,18 @@ const routes: Array<RouteRecordRaw> = [
     meta: { title: 'Order', parent: 'Transaction' },
   },
   {
+    path: '/order/create',
+    name: 'OrderCreate',
+    component: () => import('../views/OrderFormView.vue'),
+    meta: { title: 'Create Order', parent: 'Transaction' },
+  },
+  {
+    path: '/order/:id',
+    name: 'OrderDetail',
+    component: () => import('../views/OrderDetailView.vue'),
+    meta: { title: 'Order Details', parent: 'Transaction' },
+  },
+  {
     path: '/category',
     name: 'Category',
     component: () => import('../views/CategoryView.vue'),

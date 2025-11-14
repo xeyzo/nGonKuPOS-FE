@@ -122,8 +122,8 @@ interface Product {
   stock: number;
   picturePath?: string;
   isActive: boolean;
-  uomId?: number;
-  categoryId?: number;
+  uomId?: number | null;
+  categoryId?: number | null;
 }
 
 const productStore = useProductStore();

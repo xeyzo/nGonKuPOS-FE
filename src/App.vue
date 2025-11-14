@@ -1,48 +1,51 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import TheSidebar from './components/commons/TheSidebar.vue';
-import TheNavbar from './components/commons/TheNavbar.vue';
-import DeleteConfirmationModal from './components/commons/DeleteConfirmationModal.vue';
-import { useUiStore } from './stores/ui';
-import { storeToRefs } from 'pinia';
+import { ref, onMounted, onUnmounted } from 'vue'
+import TheSidebar from './components/commons/TheSidebar.vue'
+import TheNavbar from './components/commons/TheNavbar.vue'
+import DeleteConfirmationModal from './components/commons/DeleteConfirmationModal.vue'
+import { useUiStore } from './stores/ui'
+import { storeToRefs } from 'pinia'
 
-const sidebarOpen = ref(window.innerWidth >= 1024);
-const isLargeScreen = ref(window.innerWidth >= 1024);
+const sidebarOpen = ref(window.innerWidth >= 1024)
+const isLargeScreen = ref(window.innerWidth >= 1024)
 
-const uiStore = useUiStore();
-const { 
-  isModalOpen, 
-  isDeleteConfirmationModalOpen, 
-  deleteConfirmationTitle, 
-  deleteConfirmationMessage 
-} = storeToRefs(uiStore);
+const uiStore = useUiStore()
+const {
+  isModalOpen,
+  isDeleteConfirmationModalOpen,
+  deleteConfirmationTitle,
+  deleteConfirmationMessage
+} = storeToRefs(uiStore)
 
 const toggleSidebar = () => {
-  sidebarOpen.value = !sidebarOpen.value;
-};
+  sidebarOpen.value = !sidebarOpen.value
+}
 
 const handleResize = () => {
-  const newIsLargeScreen = window.innerWidth >= 1024;
+  const newIsLargeScreen = window.innerWidth >= 1024
   if (newIsLargeScreen && !isLargeScreen.value) {
-    sidebarOpen.value = true;
+    sidebarOpen.value = true
   } else if (!newIsLargeScreen && isLargeScreen.value) {
-    sidebarOpen.value = false;
+    sidebarOpen.value = false
   }
-  isLargeScreen.value = newIsLargeScreen;
-};
+  isLargeScreen.value = newIsLargeScreen
+}
 
-window.addEventListener('resize', handleResize);
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
 
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <template>
-  <div class="relative min-h-screen lg:flex" :class="{ 'modal-open': isModalOpen }">
-    <div :class="sidebarOpen ? 'lg:w-64' : 'lg:w-0'" class="flex-shrink-0 transition-all duration-300 ease-in-out">
-      <TheSidebar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
-    </div>
-    <div class="flex-1 transition-all duration-300 ease-in-out">
+  <div class="flex h-screen bg-gray-100" :class="{ 'modal-open': isModalOpen }">
+    <TheSidebar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
+    <div class="flex-1 flex flex-col overflow-hidden">
       <TheNavbar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
-      <main class="p-4 sm:p-6">
+      <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4 sm:p-6">
         <router-view />
       </main>
     </div>
@@ -55,6 +58,12 @@ window.addEventListener('resize', handleResize);
     />
   </div>
 </template>
+
+<style>
+.modal-open {
+  overflow: hidden;
+}
+</style>
 
 <style>
 .modal-open {

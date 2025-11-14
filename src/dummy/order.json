@@ -1,0 +1,2263 @@
+{
+    "status":  200,
+    "message":  "Success",
+    "data":  {
+                 "content":  [
+                                 {
+                                     "id":  2,
+                                     "receiptNumber":  "ORD-20251109-000002",
+                                     "orderDate":  "2025-11-09",
+                                     "status":  "NEW",
+                                     "outletName":  "POS Cafe Alpha",
+                                     "customerName":  "Budi",
+                                     "tableNumber":  "A2",
+                                     "discountTotal":  0,
+                                     "subtotal":  47000,
+                                     "taxTotal":  0,
+                                     "totalAmount":  36000,
+                                     "paidAmount":  0,
+                                     "changeAmount":  0,
+                                     "notes":  "Takeaway order",
+                                     "items":  [
+                                                   {
+                                                       "id":  7,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "price":  3500,
+                                                       "quantity":  10
+                                                   },
+                                                   {
+                                                       "id":  5,
+                                                       "name":  "Susu Kental Manis",
+                                                       "price":  12000,
+                                                       "quantity":  1
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  1,
+                                     "receiptNumber":  "ORD-20251109-000001",
+                                     "orderDate":  "2025-11-09",
+                                     "status":  "NEW",
+                                     "outletName":  "POS Cafe Alpha",
+                                     "customerName":  "Andi",
+                                     "tableNumber":  "A1",
+                                     "discountTotal":  0,
+                                     "subtotal":  95000,
+                                     "taxTotal":  0,
+                                     "totalAmount":  88000,
+                                     "paidAmount":  0,
+                                     "changeAmount":  0,
+                                     "notes":  "Dine-in order",
+                                     "items":  [
+                                                   {
+                                                       "id":  2,
+                                                       "name":  "Kopi Arabika Premium 200g",
+                                                       "price":  35000,
+                                                       "quantity":  2
+                                                   },
+                                                   {
+                                                       "id":  3,
+                                                       "name":  "Teh Melati 100g",
+                                                       "price":  25000,
+                                                       "quantity":  1
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  3,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  18000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T5",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  1980,
+                                     "orderDate":  "2025-11-09",
+                                     "totalAmount":  14980,
+                                     "customerName":  "Dewi",
+                                     "items":  [
+                                                   {
+                                                       "price":  3000,
+                                                       "quantity":  1,
+                                                       "name":  "Korek Api",
+                                                       "id":  20
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  1,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  4,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  86500,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T15",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  9515,
+                                     "orderDate":  "2025-10-26",
+                                     "totalAmount":  91015,
+                                     "customerName":  "Lestari",
+                                     "items":  [
+                                                   {
+                                                       "price":  20000,
+                                                       "quantity":  1,
+                                                       "name":  "Minyak Goreng 1L",
+                                                       "id":  8
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  3,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  1,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  5000,
+                                                       "quantity":  2,
+                                                       "name":  "Sabun Mandi",
+                                                       "id":  17
+                                                   },
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  1,
+                                                       "name":  "Gula Pasir 1kg",
+                                                       "id":  4
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  5,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  45000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T16",
+                                     "status":  "NEW",
+                                     "taxTotal":  4950,
+                                     "orderDate":  "2025-10-21",
+                                     "totalAmount":  44950,
+                                     "customerName":  "Hadi",
+                                     "items":  [
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   },
+                                                   {
+                                                       "price":  5000,
+                                                       "quantity":  3,
+                                                       "name":  "Sabun Mandi",
+                                                       "id":  17
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  6,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  177000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T14",
+                                     "status":  "PAID",
+                                     "taxTotal":  19470,
+                                     "orderDate":  "2025-10-20",
+                                     "totalAmount":  191470,
+                                     "customerName":  "Gita",
+                                     "items":  [
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  3,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   },
+                                                   {
+                                                       "price":  5000,
+                                                       "quantity":  2,
+                                                       "name":  "Sabun Mandi",
+                                                       "id":  17
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  3,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   },
+                                                   {
+                                                       "price":  35000,
+                                                       "quantity":  2,
+                                                       "name":  "Kopi Arabika Premium 200g",
+                                                       "id":  2
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  2,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  7,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  60000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T11",
+                                     "status":  "PAID",
+                                     "taxTotal":  6600,
+                                     "orderDate":  "2025-10-23",
+                                     "totalAmount":  61600,
+                                     "customerName":  "Hadi",
+                                     "items":  [
+                                                   {
+                                                       "price":  35000,
+                                                       "quantity":  1,
+                                                       "name":  "Kopi Arabika Premium 200g",
+                                                       "id":  2
+                                                   },
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  1,
+                                                       "name":  "Telur Ayam 1kg",
+                                                       "id":  13
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  8,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  83500,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T1",
+                                     "status":  "PAID",
+                                     "taxTotal":  9185,
+                                     "orderDate":  "2025-11-01",
+                                     "totalAmount":  87685,
+                                     "customerName":  "Lestari",
+                                     "items":  [
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  2,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  1,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  3,
+                                                       "name":  "Pasta Gigi",
+                                                       "id":  18
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  9,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  77000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T12",
+                                     "status":  "NEW",
+                                     "taxTotal":  8470,
+                                     "orderDate":  "2025-10-15",
+                                     "totalAmount":  80470,
+                                     "customerName":  "Eka",
+                                     "items":  [
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  1,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   },
+                                                   {
+                                                       "price":  3000,
+                                                       "quantity":  1,
+                                                       "name":  "Korek Api",
+                                                       "id":  20
+                                                   },
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  3,
+                                                       "name":  "Gula Pasir 1kg",
+                                                       "id":  4
+                                                   },
+                                                   {
+                                                       "price":  5000,
+                                                       "quantity":  1,
+                                                       "name":  "Sabun Mandi",
+                                                       "id":  17
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  10,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  199000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T4",
+                                     "status":  "NEW",
+                                     "taxTotal":  21890,
+                                     "orderDate":  "2025-10-28",
+                                     "totalAmount":  215890,
+                                     "customerName":  "Gita",
+                                     "items":  [
+                                                   {
+                                                       "price":  20000,
+                                                       "quantity":  3,
+                                                       "name":  "Minyak Goreng 1L",
+                                                       "id":  8
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  1,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  2,
+                                                       "name":  "Kecap Manis 600ml",
+                                                       "id":  10
+                                                   },
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  3,
+                                                       "name":  "Telur Ayam 1kg",
+                                                       "id":  13
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  11,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  31000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T18",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  3410,
+                                     "orderDate":  "2025-10-19",
+                                     "totalAmount":  29410,
+                                     "customerName":  "Joko",
+                                     "items":  [
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  1,
+                                                       "name":  "Deterjen Bubuk 1kg",
+                                                       "id":  16
+                                                   },
+                                                   {
+                                                       "price":  3000,
+                                                       "quantity":  1,
+                                                       "name":  "Korek Api",
+                                                       "id":  20
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  12,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  120000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T16",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  13200,
+                                     "orderDate":  "2025-10-25",
+                                     "totalAmount":  128200,
+                                     "customerName":  "Hadi",
+                                     "items":  [
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  3,
+                                                       "name":  "Gula Pasir 1kg",
+                                                       "id":  4
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  3,
+                                                       "name":  "Susu Kental Manis",
+                                                       "id":  5
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  13,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  34000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T14",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  3740,
+                                     "orderDate":  "2025-11-13",
+                                     "totalAmount":  32740,
+                                     "customerName":  "Hadi",
+                                     "items":  [
+                                                   {
+                                                       "price":  3000,
+                                                       "quantity":  2,
+                                                       "name":  "Korek Api",
+                                                       "id":  20
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  2,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Bawang Putih 250g",
+                                                       "id":  15
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  14,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  68000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T13",
+                                     "status":  "PAID",
+                                     "taxTotal":  7480,
+                                     "orderDate":  "2025-11-06",
+                                     "totalAmount":  70480,
+                                     "customerName":  "Gita",
+                                     "items":  [
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  1,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   },
+                                                   {
+                                                       "price":  35000,
+                                                       "quantity":  1,
+                                                       "name":  "Kopi Arabika Premium 200g",
+                                                       "id":  2
+                                                   },
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  1,
+                                                       "name":  "Telur Ayam 1kg",
+                                                       "id":  13
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  15,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  12000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T4",
+                                     "status":  "PAID",
+                                     "taxTotal":  1320,
+                                     "orderDate":  "2025-10-16",
+                                     "totalAmount":  8320,
+                                     "customerName":  "Fajar",
+                                     "items":  [
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Susu Kental Manis",
+                                                       "id":  5
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  16,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  261000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T16",
+                                     "status":  "NEW",
+                                     "taxTotal":  28710,
+                                     "orderDate":  "2025-10-22",
+                                     "totalAmount":  284710,
+                                     "customerName":  "Indah",
+                                     "items":  [
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  1,
+                                                       "name":  "Telur Ayam 1kg",
+                                                       "id":  13
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  2,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  2,
+                                                       "name":  "Bawang Merah 250g",
+                                                       "id":  14
+                                                   },
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  2,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  3,
+                                                       "name":  "Sambal Botol",
+                                                       "id":  11
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  17,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  89000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T9",
+                                     "status":  "NEW",
+                                     "taxTotal":  9790,
+                                     "orderDate":  "2025-11-09",
+                                     "totalAmount":  93790,
+                                     "customerName":  "Eka",
+                                     "items":  [
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  1,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   },
+                                                   {
+                                                       "price":  20000,
+                                                       "quantity":  1,
+                                                       "name":  "Minyak Goreng 1L",
+                                                       "id":  8
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Sambal Botol",
+                                                       "id":  11
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Bawang Putih 250g",
+                                                       "id":  15
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  18,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  106000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T3",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  11660,
+                                     "orderDate":  "2025-11-01",
+                                     "totalAmount":  112660,
+                                     "customerName":  "Indah",
+                                     "items":  [
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  2,
+                                                       "name":  "Bawang Putih 250g",
+                                                       "id":  15
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  1,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  2,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   },
+                                                   {
+                                                       "price":  20000,
+                                                       "quantity":  3,
+                                                       "name":  "Minyak Goreng 1L",
+                                                       "id":  8
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  19,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  85000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T16",
+                                     "status":  "NEW",
+                                     "taxTotal":  9350,
+                                     "orderDate":  "2025-10-25",
+                                     "totalAmount":  89350,
+                                     "customerName":  "Fajar",
+                                     "items":  [
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  1,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   },
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  3,
+                                                       "name":  "Gula Pasir 1kg",
+                                                       "id":  4
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  2,
+                                                       "name":  "Pasta Gigi",
+                                                       "id":  18
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  2,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  20,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  50000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T18",
+                                     "status":  "PAID",
+                                     "taxTotal":  5500,
+                                     "orderDate":  "2025-10-27",
+                                     "totalAmount":  50500,
+                                     "customerName":  "Fajar",
+                                     "items":  [
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  2,
+                                                       "name":  "Teh Melati 100g",
+                                                       "id":  3
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  21,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  90000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T14",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  9900,
+                                     "orderDate":  "2025-11-11",
+                                     "totalAmount":  94900,
+                                     "customerName":  "Eka",
+                                     "items":  [
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  2,
+                                                       "name":  "Deterjen Bubuk 1kg",
+                                                       "id":  16
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  3,
+                                                       "name":  "Pasta Gigi",
+                                                       "id":  18
+                                                   },
+                                                   {
+                                                       "price":  5000,
+                                                       "quantity":  2,
+                                                       "name":  "Sabun Mandi",
+                                                       "id":  17
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  22,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  290000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T10",
+                                     "status":  "PAID",
+                                     "taxTotal":  31900,
+                                     "orderDate":  "2025-10-26",
+                                     "totalAmount":  316900,
+                                     "customerName":  "Hadi",
+                                     "items":  [
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  1,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   },
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  1,
+                                                       "name":  "Telur Ayam 1kg",
+                                                       "id":  13
+                                                   },
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  3,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   },
+                                                   {
+                                                       "price":  20000,
+                                                       "quantity":  2,
+                                                       "name":  "Minyak Goreng 1L",
+                                                       "id":  8
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  23,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  74500,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T17",
+                                     "status":  "NEW",
+                                     "taxTotal":  8195,
+                                     "orderDate":  "2025-11-05",
+                                     "totalAmount":  77695,
+                                     "customerName":  "Citra",
+                                     "items":  [
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  1,
+                                                       "name":  "Teh Melati 100g",
+                                                       "id":  3
+                                                   },
+                                                   {
+                                                       "price":  3000,
+                                                       "quantity":  2,
+                                                       "name":  "Korek Api",
+                                                       "id":  20
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  3,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  1,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  2,
+                                                       "name":  "Pasta Gigi",
+                                                       "id":  18
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  24,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  131500,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T13",
+                                     "status":  "NEW",
+                                     "taxTotal":  14465,
+                                     "orderDate":  "2025-10-26",
+                                     "totalAmount":  140965,
+                                     "customerName":  "Eka",
+                                     "items":  [
+                                                   {
+                                                       "price":  3000,
+                                                       "quantity":  2,
+                                                       "name":  "Korek Api",
+                                                       "id":  20
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  2,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   },
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  3,
+                                                       "name":  "Gula Pasir 1kg",
+                                                       "id":  4
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  3,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  3,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  25,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  8000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T10",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  880,
+                                     "orderDate":  "2025-11-08",
+                                     "totalAmount":  3880,
+                                     "customerName":  "Dewi",
+                                     "items":  [
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  1,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  26,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  164000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T17",
+                                     "status":  "NEW",
+                                     "taxTotal":  18040,
+                                     "orderDate":  "2025-11-07",
+                                     "totalAmount":  177040,
+                                     "customerName":  "Indah",
+                                     "items":  [
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  2,
+                                                       "name":  "Telur Ayam 1kg",
+                                                       "id":  13
+                                                   },
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  3,
+                                                       "name":  "Gula Pasir 1kg",
+                                                       "id":  4
+                                                   },
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  1,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  27,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  96000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T9",
+                                     "status":  "NEW",
+                                     "taxTotal":  10560,
+                                     "orderDate":  "2025-11-02",
+                                     "totalAmount":  101560,
+                                     "customerName":  "Citra",
+                                     "items":  [
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  3,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Bawang Merah 250g",
+                                                       "id":  14
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  28,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  124000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T9",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  13640,
+                                     "orderDate":  "2025-11-01",
+                                     "totalAmount":  132640,
+                                     "customerName":  "Kartika",
+                                     "items":  [
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  1,
+                                                       "name":  "Teh Melati 100g",
+                                                       "id":  3
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  2,
+                                                       "name":  "Bawang Merah 250g",
+                                                       "id":  14
+                                                   },
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  1,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  5000,
+                                                       "quantity":  3,
+                                                       "name":  "Sabun Mandi",
+                                                       "id":  17
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  29,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  212000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T9",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  23320,
+                                     "orderDate":  "2025-10-23",
+                                     "totalAmount":  230320,
+                                     "customerName":  "Hadi",
+                                     "items":  [
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  2,
+                                                       "name":  "Bawang Putih 250g",
+                                                       "id":  15
+                                                   },
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  3,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  1,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  30,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  88000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T7",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  9680,
+                                     "orderDate":  "2025-10-28",
+                                     "totalAmount":  92680,
+                                     "customerName":  "Citra",
+                                     "items":  [
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  3,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Bawang Merah 250g",
+                                                       "id":  14
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  1,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  2,
+                                                       "name":  "Bawang Putih 250g",
+                                                       "id":  15
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  31,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  157000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T8",
+                                     "status":  "PAID",
+                                     "taxTotal":  17270,
+                                     "orderDate":  "2025-10-25",
+                                     "totalAmount":  169270,
+                                     "customerName":  "Fajar",
+                                     "items":  [
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  1,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  3,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  2,
+                                                       "name":  "Pasta Gigi",
+                                                       "id":  18
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  3,
+                                                       "name":  "Susu Kental Manis",
+                                                       "id":  5
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  32,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  156000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  null,
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T4",
+                                     "status":  "NEW",
+                                     "taxTotal":  17160,
+                                     "orderDate":  "2025-10-20",
+                                     "totalAmount":  168160,
+                                     "customerName":  "Lestari",
+                                     "items":  [
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  2,
+                                                       "name":  "Kecap Manis 600ml",
+                                                       "id":  10
+                                                   },
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  2,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  33,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  28000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251024-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T15",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  3080,
+                                     "orderDate":  "2025-10-24",
+                                     "totalAmount":  26080,
+                                     "customerName":  "Gita",
+                                     "items":  [
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  1,
+                                                       "name":  "Deterjen Bubuk 1kg",
+                                                       "id":  16
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  34,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  126000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251110-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T6",
+                                     "status":  "PAID",
+                                     "taxTotal":  13860,
+                                     "orderDate":  "2025-11-10",
+                                     "totalAmount":  134860,
+                                     "customerName":  "Fajar",
+                                     "items":  [
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  3,
+                                                       "name":  "Telur Ayam 1kg",
+                                                       "id":  13
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  1,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  3,
+                                                       "name":  "Sambal Botol",
+                                                       "id":  11
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  35,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  125000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251016-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T8",
+                                     "status":  "PAID",
+                                     "taxTotal":  13750,
+                                     "orderDate":  "2025-10-16",
+                                     "totalAmount":  133750,
+                                     "customerName":  "Kartika",
+                                     "items":  [
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  2,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  1,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   },
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  3,
+                                                       "name":  "Kecap Manis 600ml",
+                                                       "id":  10
+                                                   },
+                                                   {
+                                                       "price":  20000,
+                                                       "quantity":  2,
+                                                       "name":  "Minyak Goreng 1L",
+                                                       "id":  8
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  36,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  100000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251106-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T19",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  11000,
+                                     "orderDate":  "2025-11-06",
+                                     "totalAmount":  106000,
+                                     "customerName":  "Eka",
+                                     "items":  [
+                                                   {
+                                                       "price":  20000,
+                                                       "quantity":  2,
+                                                       "name":  "Minyak Goreng 1L",
+                                                       "id":  8
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  2,
+                                                       "name":  "Sambal Botol",
+                                                       "id":  11
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  3,
+                                                       "name":  "Bawang Merah 250g",
+                                                       "id":  14
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  37,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  12000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251016-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T14",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  1320,
+                                     "orderDate":  "2025-10-16",
+                                     "totalAmount":  8320,
+                                     "customerName":  "Kartika",
+                                     "items":  [
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Bawang Putih 250g",
+                                                       "id":  15
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  38,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  75000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251027-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T1",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  8250,
+                                     "orderDate":  "2025-10-27",
+                                     "totalAmount":  78250,
+                                     "customerName":  "Lestari",
+                                     "items":  [
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  3,
+                                                       "name":  "Teh Melati 100g",
+                                                       "id":  3
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  39,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  234000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251108-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T5",
+                                     "status":  "PAID",
+                                     "taxTotal":  25740,
+                                     "orderDate":  "2025-11-08",
+                                     "totalAmount":  254740,
+                                     "customerName":  "Joko",
+                                     "items":  [
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  2,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  3,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  40,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  58000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251101-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T17",
+                                     "status":  "NEW",
+                                     "taxTotal":  6380,
+                                     "orderDate":  "2025-11-01",
+                                     "totalAmount":  59380,
+                                     "customerName":  "Lestari",
+                                     "items":  [
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  1,
+                                                       "name":  "Deterjen Bubuk 1kg",
+                                                       "id":  16
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  41,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  16000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251027-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T8",
+                                     "status":  "NEW",
+                                     "taxTotal":  1760,
+                                     "orderDate":  "2025-10-27",
+                                     "totalAmount":  12760,
+                                     "customerName":  "Joko",
+                                     "items":  [
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  2,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  42,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  96000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251029-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T9",
+                                     "status":  "PAID",
+                                     "taxTotal":  10560,
+                                     "orderDate":  "2025-10-29",
+                                     "totalAmount":  101560,
+                                     "customerName":  "Eka",
+                                     "items":  [
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  2,
+                                                       "name":  "Pasta Gigi",
+                                                       "id":  18
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Bawang Merah 250g",
+                                                       "id":  14
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  1,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  5000,
+                                                       "quantity":  2,
+                                                       "name":  "Sabun Mandi",
+                                                       "id":  17
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  43,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  30000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251019-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T15",
+                                     "status":  "NEW",
+                                     "taxTotal":  3300,
+                                     "orderDate":  "2025-10-19",
+                                     "totalAmount":  28300,
+                                     "customerName":  "Indah",
+                                     "items":  [
+                                                   {
+                                                       "price":  3000,
+                                                       "quantity":  2,
+                                                       "name":  "Korek Api",
+                                                       "id":  20
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  2,
+                                                       "name":  "Sambal Botol",
+                                                       "id":  11
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  44,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  83000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251016-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T5",
+                                     "status":  "NEW",
+                                     "taxTotal":  9130,
+                                     "orderDate":  "2025-10-16",
+                                     "totalAmount":  87130,
+                                     "customerName":  "Eka",
+                                     "items":  [
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  1,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  1,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  1,
+                                                       "name":  "Pasta Gigi",
+                                                       "id":  18
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  45,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  170000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251031-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T2",
+                                     "status":  "NEW",
+                                     "taxTotal":  18700,
+                                     "orderDate":  "2025-10-31",
+                                     "totalAmount":  183700,
+                                     "customerName":  "Eka",
+                                     "items":  [
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  2,
+                                                       "name":  "Pasta Gigi",
+                                                       "id":  18
+                                                   },
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  1,
+                                                       "name":  "Kecap Manis 600ml",
+                                                       "id":  10
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  2,
+                                                       "name":  "Deterjen Bubuk 1kg",
+                                                       "id":  16
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   },
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  2,
+                                                       "name":  "Teh Melati 100g",
+                                                       "id":  3
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  46,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  40000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251027-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T15",
+                                     "status":  "PAID",
+                                     "taxTotal":  4400,
+                                     "orderDate":  "2025-10-27",
+                                     "totalAmount":  39400,
+                                     "customerName":  "Lestari",
+                                     "items":  [
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  1,
+                                                       "name":  "Telur Ayam 1kg",
+                                                       "id":  13
+                                                   },
+                                                   {
+                                                       "price":  5000,
+                                                       "quantity":  3,
+                                                       "name":  "Sabun Mandi",
+                                                       "id":  17
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  47,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  252000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251016-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T15",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  27720,
+                                     "orderDate":  "2025-10-16",
+                                     "totalAmount":  274720,
+                                     "customerName":  "Gita",
+                                     "items":  [
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  2,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Susu Kental Manis",
+                                                       "id":  5
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Bawang Merah 250g",
+                                                       "id":  14
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  3,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  3,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  48,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  103000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251022-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T19",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  11330,
+                                     "orderDate":  "2025-10-22",
+                                     "totalAmount":  109330,
+                                     "customerName":  "Hadi",
+                                     "items":  [
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  1,
+                                                       "name":  "Teh Melati 100g",
+                                                       "id":  3
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  2,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  3,
+                                                       "name":  "Susu Kental Manis",
+                                                       "id":  5
+                                                   },
+                                                   {
+                                                       "price":  35000,
+                                                       "quantity":  1,
+                                                       "name":  "Kopi Arabika Premium 200g",
+                                                       "id":  2
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  49,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  162500,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251016-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T6",
+                                     "status":  "NEW",
+                                     "taxTotal":  17875,
+                                     "orderDate":  "2025-10-16",
+                                     "totalAmount":  175375,
+                                     "customerName":  "Citra",
+                                     "items":  [
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  1,
+                                                       "name":  "Gula Pasir 1kg",
+                                                       "id":  4
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  1,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  1,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  2,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  35000,
+                                                       "quantity":  2,
+                                                       "name":  "Kopi Arabika Premium 200g",
+                                                       "id":  2
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  50,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  23000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251019-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T10",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  2530,
+                                     "orderDate":  "2025-10-19",
+                                     "totalAmount":  20530,
+                                     "customerName":  "Dewi",
+                                     "items":  [
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  2,
+                                                       "name":  "Pasta Gigi",
+                                                       "id":  18
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  2,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  51,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  57500,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251106-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T9",
+                                     "status":  "PAID",
+                                     "taxTotal":  6325,
+                                     "orderDate":  "2025-11-06",
+                                     "totalAmount":  58825,
+                                     "customerName":  "Eka",
+                                     "items":  [
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  1,
+                                                       "name":  "Gula Pasir 1kg",
+                                                       "id":  4
+                                                   },
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  3,
+                                                       "name":  "Bawang Putih 250g",
+                                                       "id":  15
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  1,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  52,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  288000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251113-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T3",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  31680,
+                                     "orderDate":  "2025-11-13",
+                                     "totalAmount":  314680,
+                                     "customerName":  "Lestari",
+                                     "items":  [
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  2,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  3,
+                                                       "name":  "Deterjen Bubuk 1kg",
+                                                       "id":  16
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  3,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  53,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  201000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251105-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T9",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  22110,
+                                     "orderDate":  "2025-11-05",
+                                     "totalAmount":  218110,
+                                     "customerName":  "Indah",
+                                     "items":  [
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   },
+                                                   {
+                                                       "price":  5000,
+                                                       "quantity":  3,
+                                                       "name":  "Sabun Mandi",
+                                                       "id":  17
+                                                   },
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  2,
+                                                       "name":  "Kecap Manis 600ml",
+                                                       "id":  10
+                                                   },
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  2,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  54,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  92000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251103-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T14",
+                                     "status":  "NEW",
+                                     "taxTotal":  10120,
+                                     "orderDate":  "2025-11-03",
+                                     "totalAmount":  97120,
+                                     "customerName":  "Hadi",
+                                     "items":  [
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  1,
+                                                       "name":  "Sambal Botol",
+                                                       "id":  11
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  2,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  3,
+                                                       "name":  "Baterai AA",
+                                                       "id":  21
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  55,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  30000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251109-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T13",
+                                     "status":  "PAID",
+                                     "taxTotal":  3300,
+                                     "orderDate":  "2025-11-09",
+                                     "totalAmount":  28300,
+                                     "customerName":  "Gita",
+                                     "items":  [
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  56,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  176000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251028-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T16",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  19360,
+                                     "orderDate":  "2025-10-28",
+                                     "totalAmount":  190360,
+                                     "customerName":  "Lestari",
+                                     "items":  [
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  2,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  2,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  57,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  6000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251024-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T9",
+                                     "status":  "PAID",
+                                     "taxTotal":  660,
+                                     "orderDate":  "2025-10-24",
+                                     "totalAmount":  1660,
+                                     "customerName":  "Gita",
+                                     "items":  [
+                                                   {
+                                                       "price":  3000,
+                                                       "quantity":  2,
+                                                       "name":  "Korek Api",
+                                                       "id":  20
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  58,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  159000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251105-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T10",
+                                     "status":  "NEW",
+                                     "taxTotal":  17490,
+                                     "orderDate":  "2025-11-05",
+                                     "totalAmount":  171490,
+                                     "customerName":  "Hadi",
+                                     "items":  [
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  2,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   },
+                                                   {
+                                                       "price":  3000,
+                                                       "quantity":  1,
+                                                       "name":  "Korek Api",
+                                                       "id":  20
+                                                   },
+                                                   {
+                                                       "price":  18000,
+                                                       "quantity":  2,
+                                                       "name":  "Kecap Manis 600ml",
+                                                       "id":  10
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  59,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  78500,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251110-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T5",
+                                     "status":  "NEW",
+                                     "taxTotal":  8635,
+                                     "orderDate":  "2025-11-10",
+                                     "totalAmount":  82135,
+                                     "customerName":  "Indah",
+                                     "items":  [
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  1,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   },
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  3,
+                                                       "name":  "Teh Melati 100g",
+                                                       "id":  3
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  60,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  112500,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251028-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T16",
+                                     "status":  "CANCELLED",
+                                     "taxTotal":  12375,
+                                     "orderDate":  "2025-10-28",
+                                     "totalAmount":  119875,
+                                     "customerName":  "Kartika",
+                                     "items":  [
+                                                   {
+                                                       "price":  8000,
+                                                       "quantity":  3,
+                                                       "name":  "Pasta Gigi",
+                                                       "id":  18
+                                                   },
+                                                   {
+                                                       "price":  20000,
+                                                       "quantity":  3,
+                                                       "name":  "Minyak Goreng 1L",
+                                                       "id":  8
+                                                   },
+                                                   {
+                                                       "price":  25000,
+                                                       "quantity":  1,
+                                                       "name":  "Telur Ayam 1kg",
+                                                       "id":  13
+                                                   },
+                                                   {
+                                                       "price":  3500,
+                                                       "quantity":  1,
+                                                       "name":  "Mie Instan Goreng",
+                                                       "id":  7
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  61,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  128000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251104-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T6",
+                                     "status":  "NEW",
+                                     "taxTotal":  14080,
+                                     "orderDate":  "2025-11-04",
+                                     "totalAmount":  137080,
+                                     "customerName":  "Dewi",
+                                     "items":  [
+                                                   {
+                                                       "price":  35000,
+                                                       "quantity":  2,
+                                                       "name":  "Kopi Arabika Premium 200g",
+                                                       "id":  2
+                                                   },
+                                                   {
+                                                       "price":  28000,
+                                                       "quantity":  1,
+                                                       "name":  "Sirup Cocopandan",
+                                                       "id":  6
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Shampo",
+                                                       "id":  19
+                                                   }
+                                               ]
+                                 },
+                                 {
+                                     "id":  62,
+                                     "paidAmount":  0,
+                                     "discountTotal":  5000,
+                                     "subtotal":  149000,
+                                     "outletName":  "POS Cafe Alpha",
+                                     "receiptNumber":  "ORD-20251024-",
+                                     "notes":  "",
+                                     "changeAmount":  0,
+                                     "tableNumber":  "T13",
+                                     "status":  "PAID",
+                                     "taxTotal":  16390,
+                                     "orderDate":  "2025-10-24",
+                                     "totalAmount":  160390,
+                                     "customerName":  "Hadi",
+                                     "items":  [
+                                                   {
+                                                       "price":  12000,
+                                                       "quantity":  2,
+                                                       "name":  "Sambal Botol",
+                                                       "id":  11
+                                                   },
+                                                   {
+                                                       "price":  35000,
+                                                       "quantity":  1,
+                                                       "name":  "Kopi Arabika Premium 200g",
+                                                       "id":  2
+                                                   },
+                                                   {
+                                                       "price":  15000,
+                                                       "quantity":  2,
+                                                       "name":  "Tepung Terigu 1kg",
+                                                       "id":  9
+                                                   },
+                                                   {
+                                                       "price":  60000,
+                                                       "quantity":  1,
+                                                       "name":  "Beras 5kg",
+                                                       "id":  12
+                                                   }
+                                               ]
+                                 }
+                             ],
+                 "page":  0,
+                 "size":  20,
+                 "totalElements":  62,
+                 "totalPages":  4,
+                 "first":  true,
+                 "last":  false,
+                 "empty":  false,
+                 "sort":  "id",
+                 "direction":  "desc"
+             },
+    "errors":  null,
+    "timestamp":  "2025-11-09T21:53:37.4580328"
+}
