@@ -43,34 +43,42 @@ const statusColor = (status: string) => {
 </script>
 
 <template>
-  <div v-if="order" class="bg-white p-4 sm:p-6 rounded-lg shadow-xl border border-gray-200">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold">Order Details</h1>
-      <span :class="`text-sm font-medium px-2 py-1 rounded-full ${statusColor(order.status)}`">{{
-        order.status
-      }}</span>
+  <div
+    v-if="order"
+    class="bg-white p-4 sm:p-6 rounded-lg shadow-xl border border-gray-200 h-full flex flex-col"
+  >
+    <!-- Non-growing top part -->
+    <div>
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Order Details</h1>
+        <span :class="`text-sm font-medium px-2 py-1 rounded-full ${statusColor(order.status)}`">{{
+          order.status
+        }}</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="text-sm text-gray-600">Receipt Number:</p>
+          <p class="font-medium">{{ order.receiptNumber }}</p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-600">Order Date:</p>
+          <p class="font-medium">{{ order.orderDate }}</p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-600">Customer Name:</p>
+          <p class="font-medium">{{ order.customerName }}</p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-600">Table Number:</p>
+          <p class="font-medium">{{ order.tableNumber }}</p>
+        </div>
+      </div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <p class="text-sm text-gray-600">Receipt Number:</p>
-        <p class="font-medium">{{ order.receiptNumber }}</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-600">Order Date:</p>
-        <p class="font-medium">{{ order.orderDate }}</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-600">Customer Name:</p>
-        <p class="font-medium">{{ order.customerName }}</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-600">Table Number:</p>
-        <p class="font-medium">{{ order.tableNumber }}</p>
-      </div>
-    </div>
-    <div class="mt-8">
+
+    <!-- Growing middle part -->
+    <div class="mt-8 flex-grow min-h-0 flex flex-col">
       <h2 class="text-xl font-bold mb-4">Order Summary</h2>
-      <div class="overflow-x-auto max-h-96 overflow-y-auto">
+      <div class="overflow-y-auto flex-grow">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50 sticky top-0">
             <tr>
@@ -104,9 +112,7 @@ const statusColor = (status: string) => {
             <tr v-for="item in order.items" :key="item.id">
               <td class="px-6 py-4 whitespace-nowrap">{{ item.name }}</td>
               <td class="px-6 py-4 whitespace-nowrap">{{ item.quantity }}</td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                Rp {{ item.price.toLocaleString() }}
-              </td>
+              <td class="px-6 py-4 whitespace-nowrap">Rp {{ item.price.toLocaleString() }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-right">
                 Rp {{ (item.price * item.quantity).toLocaleString() }}
               </td>
@@ -115,6 +121,8 @@ const statusColor = (status: string) => {
         </table>
       </div>
     </div>
+
+    <!-- Non-growing bottom part -->
     <div class="mt-6 flex justify-end">
       <div class="w-full max-w-sm">
         <div class="flex justify-between mb-2">

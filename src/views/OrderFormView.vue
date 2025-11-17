@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useOrderStore, type Order, type OrderItem } from '@/stores/useOrder'
 import productsData from '@/dummy/product.json'
 import categoriesData from '@/dummy/category.json'
+import ThePagination from '@/components/commons/ThePagination.vue'
 
 interface Product {
   id: number
@@ -40,6 +41,23 @@ const filteredProducts = computed(() => {
   }
   return products.value.filter((product) => product.categoryId === selectedCategory.value)
 })
+
+const currentPage = ref(1)
+const pageSize = ref(8)
+
+const totalPages = computed(() => {
+  return Math.ceil(filteredProducts.value.length / pageSize.value)
+})
+
+const paginatedProducts = computed(() => {
+  const start = (currentPage.value - 1) * pageSize.value
+  const end = start + pageSize.value
+  return filteredProducts.value.slice(start, end)
+})
+
+const onPageChanged = (page: number) => {
+  currentPage.value = page
+}
 
 const addProductToOrder = (product: Product) => {
   const existingItem = order.value.items.find((item) => item.id === product.id)
@@ -109,6 +127,7 @@ const submitOrder = () => {
 
 const selectCategory = (categoryId: number) => {
   selectedCategory.value = categoryId
+  currentPage.value = 1
 }
 </script>
 
@@ -143,7 +162,7 @@ const selectCategory = (categoryId: number) => {
       </div>
 
       <div class="flex-grow flex md:flex-row flex-col gap-6 overflow-hidden min-h-0 md:items-start">
-        <div class="md:w-2/3 flex flex-col">
+        <div class="md:w-2/3 flex flex-col min-h-0">
           <h2 class="text-xl font-bold mb-4">Products</h2>
           <div class="mb-4 border-b border-gray-200">
             <nav class="-mb-px flex overflow-x-auto" aria-label="Tabs">
@@ -163,17 +182,37 @@ const selectCategory = (categoryId: number) => {
             </nav>
           </div>
           <div class="flex-grow overflow-y-auto pr-4 pb-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div
+              v-if="paginatedProducts.length > 0"
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+            >
               <div
-                v-for="product in filteredProducts"
+                v-for="product in paginatedProducts"
                 :key="product.id"
-                class="border p-4 rounded-lg cursor-pointer hover:bg-gray-100"
+                class="border p-4 rounded-lg cursor-pointer hover:bg-gray-100 flex flex-col items-center"
                 @click="addProductToOrder(product)"
               >
-                <h3 class="font-bold">{{ product.name }}</h3>
-                <p>Rp {{ product.salePrice.toLocaleString() }}</p>
+                <img
+                  src="@/assets/img/Gemini_Generated_Image_it7c11it7c11it7c.png"
+                  alt="Product Image"
+                  class="h-24 w-24 object-cover mb-4 rounded-md"
+                />
+                <h3 class="font-bold text-center">{{ product.name }}</h3>
+                <p class="text-center">Rp {{ product.salePrice.toLocaleString() }}</p>
               </div>
             </div>
+            <div v-else class="text-center text-gray-500 mt-8">
+              <p>No products found in this category.</p>
+            </div>
+            <ThePagination
+              v-if="filteredProducts.length > pageSize"
+              :currentPage="currentPage"
+              :totalPages="totalPages"
+              :totalItems="filteredProducts.length"
+              :pageSize="pageSize"
+              @page-changed="onPageChanged"
+              class="mt-4 pr-4"
+            />
           </div>
         </div>
 
