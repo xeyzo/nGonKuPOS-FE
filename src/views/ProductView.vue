@@ -139,39 +139,3 @@ const handleDelete = (product: Product) => {
 
   <ProductFormModal :show="showFormModal" :product="selectedProduct" @close="productStore.closeFormModal" @submit-form="productStore.handleSubmitForm" />
 </template>
-
-<script setup lang="ts">
-import { useProductStore } from '@/stores/useProduct';
-import { useUiStore } from '@/stores/ui';
-import ThePagination from '@/components/commons/Pagination.vue';
-import ProductFormModal from '@/components/product/ProductFormModal.vue';
-import { formatPrice } from '@/utils/format';
-import { storeToRefs } from 'pinia';
-
-interface Product {
-  id?: number;
-  barcode: string;
-  name: string;
-  description?: string;
-  costPrice: number;
-  salePrice: number;
-  stock: number;
-  picturePath?: string;
-  isActive: boolean;
-  uomId?: number | null;
-  categoryId?: number | null;
-}
-
-const productStore = useProductStore();
-const uiStore = useUiStore();
-
-const { showFormModal, selectedProduct } = storeToRefs(productStore);
-
-const handleDelete = (product: Product) => {
-  uiStore.openDeleteConfirmationModal(
-    'Delete Product',
-    `Are you sure you want to delete ${product.name}?`,
-    () => productStore.deleteProduct(product.id!)
-  );
-};
-</script>

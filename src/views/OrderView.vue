@@ -1,27 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import ordersData from '@/dummy/order.json'
-
-interface Order {
-  id: number
-  receiptNumber: string | null
-  orderDate: string
-  status: string
-  outletName: string
-  customerName: string
-  tableNumber: string
-  discountTotal: number
-  subtotal: number
-  taxTotal: number
-  totalAmount: number
-  paidAmount: number
-  changeAmount: number
-  notes: string
-}
+import { useOrderStore } from '@/stores/useOrder'
+import { storeToRefs } from 'pinia'
 
 const router = useRouter()
-const orders = ref<Order[]>(ordersData.data.content)
+const orderStore = useOrderStore()
+const { orders, hasMore, loading } = storeToRefs(orderStore)
 const search = ref('')
 
 const filteredOrders = computed(() => {
@@ -30,7 +15,8 @@ const filteredOrders = computed(() => {
   }
   return orders.value.filter(
     (order) =>
-      (order.receiptNumber && order.receiptNumber.toLowerCase().includes(search.value.toLowerCase())) ||
+      (order.receiptNumber &&
+        order.receiptNumber.toLowerCase().includes(search.value.toLowerCase())) ||
       order.customerName.toLowerCase().includes(search.value.toLowerCase())
   )
 })
@@ -55,6 +41,24 @@ const statusColor = (status: string) => {
       return 'bg-gray-100 text-gray-800'
   }
 }
+
+const handleScroll = () => {
+  const bottomOfWindow =
+    window.innerHeight + window.scrollY >= document.documentElement.offsetHeight - 100
+  if (bottomOfWindow && hasMore.value && !loading.value) {
+    orderStore.fetchOrders()
+  }
+}
+
+onMounted(() => {
+  orderStore.resetOrders()
+  orderStore.fetchOrders()
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
@@ -124,6 +128,12 @@ const statusColor = (status: string) => {
           </button>
         </div>
       </div>
+    </div>
+    <div v-if="loading" class="text-center mt-4">
+      <p>Loading...</p>
+    </div>
+    <div v-if="!hasMore" class="text-center mt-4">
+      <p>No more orders</p>
     </div>
   </div>
 </template>

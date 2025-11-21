@@ -1,30 +1,3 @@
-<script setup lang="ts">
-import { useCategoryStore } from '@/stores/useCategory';
-import { useUiStore } from '@/stores/ui';
-import Pagination from '@/components/commons/Pagination.vue';
-import CategoryFormModal from '@/components/category/CategoryFormModal.vue';
-import { storeToRefs } from 'pinia';
-
-interface Category {
-  id?: number;
-  name: string;
-  description?: string;
-}
-
-const categoryStore = useCategoryStore();
-const uiStore = useUiStore();
-
-const { showFormModal, selectedCategory } = storeToRefs(categoryStore);
-
-const handleDelete = (category: Category) => {
-  uiStore.openDeleteConfirmationModal(
-    'Delete Category',
-    `Are you sure you want to delete ${category.name}?`,
-    () => categoryStore.deleteCategory(category.id!)
-  );
-};
-</script>
-
 <template>
   <div class="bg-white p-4 sm:p-6 rounded-lg shadow-xl border border-gray-200">
     <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">

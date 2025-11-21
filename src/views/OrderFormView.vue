@@ -252,7 +252,7 @@ const selectCategory = (categoryId: number) => {
                 <div class="flex items-center">
                   <div>
                     <p class="font-semibold text-gray-800">{{ item.name }}</p>
-                    <p class="text-sm text-gray-500">@ Rp {{ item.price.toLocaleString() }}</p>
+                    <p class="text-sm text-gray-500">Rp {{ item.price.toLocaleString() }}</p>
                   </div>
                 </div>
                 <div class="flex items-center">

@@ -118,30 +118,3 @@ const handleDelete = (uom: Uom) => {
     />
   </div>
 </template>
-
-<script setup lang="ts">
-import { useUomStore } from '@/stores/useUom';
-import { useUiStore } from '@/stores/ui';
-import ThePagination from '@/components/commons/Pagination.vue';
-import UomFormModal from '@/components/uom/UomFormModal.vue';
-import type { Uom } from '@/components/uom/UomFormModal.vue';
-
-const uomStore = useUomStore();
-const uiStore = useUiStore();
-
-const handleFormSubmit = (uom: Uom) => {
-  if (uom.id) {
-    uomStore.updateUom(uom);
-  } else {
-    uomStore.addUom(uom);
-  }
-};
-
-const handleDelete = (uom: Uom) => {
-  uiStore.openDeleteConfirmationModal(
-    'Delete UoM',
-    `Are you sure you want to delete ${uom.name}?`,
-    () => uomStore.deleteUom(uom.id!)
-  );
-};
-</script>

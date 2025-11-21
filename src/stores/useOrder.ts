@@ -27,19 +27,54 @@ export interface Order {
 }
 
 export const useOrderStore = defineStore('order', () => {
-  const orders = ref<Order[]>(ordersData.data.content)
+  const orders = ref<Order[]>([])
+  const allOrders = ref<Order[]>(ordersData.data.content)
+  const currentPage = ref(1)
+  const pageSize = ref(10)
+  const hasMore = ref(true)
+  const loading = ref(false)
+
+  const totalPages = computed(() => Math.ceil(allOrders.value.length / pageSize.value))
+
+  const fetchOrders = () => {
+    if (currentPage.value > totalPages.value) {
+      hasMore.value = false
+      return
+    }
+    loading.value = true
+    const start = (currentPage.value - 1) * pageSize.value
+    const end = start + pageSize.value
+    const newOrders = allOrders.value.slice(start, end)
+    orders.value.push(...newOrders)
+    currentPage.value++
+    if (orders.value.length >= allOrders.value.length) {
+      hasMore.value = false
+    }
+    loading.value = false
+  }
 
   const createOrder = (order: Order) => {
+    allOrders.value.unshift(order)
     orders.value.unshift(order)
   }
 
   const getOrderById = (id: number) => {
-    return computed(() => orders.value.find((order) => order.id === id))
+    return computed(() => allOrders.value.find((order) => order.id === id))
+  }
+
+  const resetOrders = () => {
+    orders.value = []
+    currentPage.value = 1
+    hasMore.value = true
   }
 
   return {
     orders,
+    fetchOrders,
     createOrder,
-    getOrderById
+    getOrderById,
+    hasMore,
+    loading,
+    resetOrders
   }
 })
