@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { useOrderStore, type Order, type OrderItem } from '@/stores/useOrder'
 import productsData from '@/dummy/product.json'
 import categoriesData from '@/dummy/category.json'
-import ThePagination from '@/components/commons/ThePagination.vue'
+import Pagination from '@/components/commons/Pagination.vue'
 
 interface Product {
   id: number
@@ -169,6 +169,7 @@ const selectCategory = (categoryId: number) => {
               <button
                 v-for="category in categories"
                 :key="category.id"
+                type="button"
                 @click="selectCategory(category.id)"
                 :class="[
                   'whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm mr-4',
@@ -204,14 +205,14 @@ const selectCategory = (categoryId: number) => {
             <div v-else class="text-center text-gray-500 mt-8">
               <p>No products found in this category.</p>
             </div>
-            <ThePagination
+            <Pagination
               v-if="filteredProducts.length > pageSize"
               :currentPage="currentPage"
               :totalPages="totalPages"
               :totalItems="filteredProducts.length"
               :pageSize="pageSize"
               @page-changed="onPageChanged"
-              class="mt-4 pr-4"
+              class="mt-4"
             />
           </div>
         </div>

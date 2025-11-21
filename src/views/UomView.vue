@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import { useUomStore } from '@/stores/useUom';
+import { useUiStore } from '@/stores/ui';
+import Pagination from '@/components/commons/Pagination.vue';
+import UomFormModal from '@/components/uom/UomFormModal.vue';
+import type { Uom } from '@/components/uom/UomFormModal.vue';
+
+const uomStore = useUomStore();
+const uiStore = useUiStore();
+
+const handleFormSubmit = (uom: Uom) => {
+  if (uom.id) {
+    uomStore.updateUom(uom);
+  } else {
+    uomStore.addUom(uom);
+  }
+};
+
+const handleDelete = (uom: Uom) => {
+  uiStore.openDeleteConfirmationModal(
+    'Delete UoM',
+    `Are you sure you want to delete ${uom.name}?`,
+    () => uomStore.deleteUom(uom.id!)
+  );
+};
+</script>
+
 <template>
   <div class="bg-white p-4 sm:p-6 rounded-lg shadow-xl border border-gray-200">
     <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
@@ -76,7 +103,7 @@
         </div>
       </div>
     </div>
-    <ThePagination
+    <Pagination
       :current-page="uomStore.currentPage"
       :total-pages="uomStore.totalPages"
       :total-items="uomStore.totalUoms"
@@ -95,7 +122,7 @@
 <script setup lang="ts">
 import { useUomStore } from '@/stores/useUom';
 import { useUiStore } from '@/stores/ui';
-import ThePagination from '@/components/commons/ThePagination.vue';
+import ThePagination from '@/components/commons/Pagination.vue';
 import UomFormModal from '@/components/uom/UomFormModal.vue';
 import type { Uom } from '@/components/uom/UomFormModal.vue';
 

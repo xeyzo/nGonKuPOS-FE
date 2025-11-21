@@ -1,3 +1,39 @@
+<script setup lang="ts">
+import { useProductStore } from '@/stores/useProduct';
+import { useUiStore } from '@/stores/ui';
+import Pagination from '@/components/commons/Pagination.vue';
+import ProductFormModal from '@/components/product/ProductFormModal.vue';
+import { formatPrice } from '@/utils/format';
+import { storeToRefs } from 'pinia';
+
+interface Product {
+  id?: number;
+  barcode: string;
+  name: string;
+  description?: string;
+  costPrice: number;
+  salePrice: number;
+  stock: number;
+  picturePath?: string;
+  isActive: boolean;
+  uomId?: number | null;
+  categoryId?: number | null;
+}
+
+const productStore = useProductStore();
+const uiStore = useUiStore();
+
+const { showFormModal, selectedProduct } = storeToRefs(productStore);
+
+const handleDelete = (product: Product) => {
+  uiStore.openDeleteConfirmationModal(
+    'Delete Product',
+    `Are you sure you want to delete ${product.name}?`,
+    () => productStore.deleteProduct(product.id!)
+  );
+};
+</script>
+
 <template>
   <div class="bg-white p-4 sm:p-6 rounded-lg shadow-xl border border-gray-200">
     <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
@@ -92,7 +128,7 @@
             </div>
         </div>
     </div>
-    <ThePagination
+    <Pagination
       :current-page="productStore.currentPage"
       :total-pages="productStore.totalPages"
       :total-items="productStore.totalProducts"
@@ -107,7 +143,7 @@
 <script setup lang="ts">
 import { useProductStore } from '@/stores/useProduct';
 import { useUiStore } from '@/stores/ui';
-import ThePagination from '@/components/commons/ThePagination.vue';
+import ThePagination from '@/components/commons/Pagination.vue';
 import ProductFormModal from '@/components/product/ProductFormModal.vue';
 import { formatPrice } from '@/utils/format';
 import { storeToRefs } from 'pinia';

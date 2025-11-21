@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import TheSidebar from './components/commons/TheSidebar.vue'
-import TheNavbar from './components/commons/TheNavbar.vue'
+import Sidebar from './components/commons/Sidebar.vue'
+import Navbar from './components/commons/Navbar.vue'
 import DeleteConfirmationModal from './components/commons/DeleteConfirmationModal.vue'
 import { useUiStore } from './stores/ui'
 import { storeToRefs } from 'pinia'
@@ -42,9 +42,9 @@ onUnmounted(() => {
 
 <template>
   <div class="flex h-screen bg-gray-100" :class="{ 'modal-open': isModalOpen }">
-    <TheSidebar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
+    <Sidebar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
     <div class="flex-1 flex flex-col overflow-hidden">
-      <TheNavbar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
+      <Navbar :sidebarOpen="sidebarOpen" :isLargeScreen="isLargeScreen" @toggle-sidebar="toggleSidebar" />
       <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4 sm:p-6">
         <router-view />
       </main>

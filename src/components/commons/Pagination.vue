@@ -13,6 +13,7 @@
     </div>
     <div class="flex items-center">
       <button
+        type="button"
         @click="changePage(currentPage - 1)"
         :disabled="currentPage === 1"
         class="px-3 py-1 border rounded-l-md bg-white text-gray-500 hover:bg-gray-50 disabled:opacity-50"
@@ -23,6 +24,7 @@
         </svg>
       </button>
       <button
+        type="button"
         v-for="page in pages"
         :key="page"
         @click="changePage(page)"
@@ -34,6 +36,7 @@
         {{ currentPage }} / {{ totalPages }}
       </span>
       <button
+        type="button"
         @click="changePage(currentPage + 1)"
         :disabled="currentPage === totalPages"
         class="px-3 py-1 border rounded-r-md bg-white text-gray-500 hover:bg-gray-50 disabled:opacity-50"
