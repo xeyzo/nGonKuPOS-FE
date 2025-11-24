@@ -1,144 +1,168 @@
-import { ref, computed, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
-import allProductsData from '@/dummy/product.json'
+import { watchDebounced } from '@vueuse/core'
+import axiosClient from '@/api/axiosClient'
+import type { ProductResponse, Product } from '@/interfaces/ProductInterface'
 
-interface Product {
-  id?: number;
-  barcode: string;
-  name: string;
-  description?: string;
-  costPrice: number;
-  salePrice: number;
-  stock: number;
-  picturePath?: string;
-  isActive: boolean;
-  uomId?: number | null;
-  categoryId?: number | null;
+interface ApiError {
+  response?: {
+    data?: {
+      message?: string
+    }
+  }
 }
 
-const LOCAL_STORAGE_KEY = 'products';
-
 export const useProductStore = defineStore('product', () => {
+  const products = ref<Product[]>([])
+  const isLoading = ref(false)
+  const error = ref<string | null>(null)
+
   const search = ref('')
   const currentPage = ref(1)
   const pageSize = ref(5)
+  const totalElements = ref(0)
+  const totalPages = ref(0)
 
-  // Load products from local storage or fallback to dummy data
-  const allProducts = ref<Product[]>(loadProductsFromLocalStorage());
+  const showFormModal = ref(false)
+  const selectedProduct = ref<Product | null>(null)
 
-  // Modal State
-  const showFormModal = ref(false);
-  const selectedProduct = ref<Product | null>(null);
+  async function fetchProducts() {
+    isLoading.value = true
+    error.value = null
+    
+    try {
+      const params: { page: number, size: number, search?: string } = {
+        page: currentPage.value - 1,
+        size: pageSize.value
+      }
+      if (search.value) {
+        params.search = search.value
+      }
 
-  watch(search, () => {
-    currentPage.value = 1
-  })
+      console.log('Fetching products with params:', params);
+      const response = await axiosClient.get<ProductResponse>('/products', { params })
 
-  const filteredProducts = computed(() => {
-    if (!search.value) {
-      return allProducts.value
+      const result = response.data.data
+
+      products.value = result.content
+      totalElements.value = result.totalElements
+      totalPages.value = result.totalPages
+
+    } catch (err) {
+      const apiError = err as ApiError
+      console.error(apiError)
+      error.value = apiError.response?.data?.message || 'Gagal mengambil data produk'
+    } finally {
+      isLoading.value = false
     }
-    return allProducts.value.filter((product) =>
-      product.name.toLowerCase().includes(search.value.toLowerCase())
-    )
+  }
+
+  async function addProduct(newProduct: Product) {
+    isLoading.value = true
+    try {
+      await axiosClient.post('/products', newProduct)
+      await fetchProducts()
+    } catch (err) {
+      error.value = 'Gagal menambah produk'
+      throw err
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function updateProduct(updatedProduct: Product) {
+    if (!updatedProduct.id) return
+    isLoading.value = true
+    try {
+      await axiosClient.put(`/products/${updatedProduct.id}`, updatedProduct)
+      await fetchProducts()
+    } catch (err) {
+      error.value = 'Gagal update produk'
+      throw err
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function deleteProduct(id: number) {    
+    isLoading.value = true
+    try {
+      await axiosClient.delete(`/products/${id}`)
+      await fetchProducts()
+      
+      if (products.value.length === 1 && currentPage.value > 1) {
+        currentPage.value--
+        await fetchProducts()
+      }
+    } catch {
+      error.value = 'Gagal menghapus produk'
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  
+  watchDebounced(search, () => {
+    currentPage.value = 1
+    fetchProducts()
+  }, { debounce: 500, maxWait: 2000 })
+
+  watch(currentPage, () => {
+    fetchProducts()
   })
 
-  const totalProducts = computed(() => filteredProducts.value.length)
+  function openAddModal() {
+    selectedProduct.value = null
+    showFormModal.value = true
+  }
 
-  const totalPages = computed(() => Math.ceil(totalProducts.value / pageSize.value))
+  function openEditModal(product: Product) {
+    selectedProduct.value = { ...product } 
+    showFormModal.value = true
+  }
 
-  const paginatedProducts = computed(() => {
-    const startIndex = (currentPage.value - 1) * pageSize.value
-    const endIndex = startIndex + pageSize.value
-    return filteredProducts.value.slice(startIndex, endIndex)
-  })
+  function closeFormModal() {
+    showFormModal.value = false
+    selectedProduct.value = null
+  }
+
+  function handleSubmitForm(formData: Product) {
+    if (formData.id) {
+      updateProduct(formData)
+        .then(() => closeFormModal())
+        .catch(() => console.log('Gagal mengupdate produk'))
+    } else {
+      addProduct(formData)
+        .then(() => closeFormModal())
+        .catch(() => console.log('Gagal menambah produk'))
+    }
+  }
 
   function setCurrentPage(page: number) {
     currentPage.value = page
   }
 
-  function saveProductsToLocalStorage() {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allProducts.value));
-  }
-
-  function loadProductsFromLocalStorage(): Product[] {
-    const storedProducts = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (storedProducts) {
-      try {
-        return JSON.parse(storedProducts);
-      } catch (e) {
-        console.error("Error parsing products from localStorage", e);
-        // Fallback to dummy data if parsing fails
-        return allProductsData.data.content;
-      }
-    }
-    return allProductsData.data.content;
-  }
-
-  function addProduct(newProduct: Product) {
-    const maxId = allProducts.value.reduce((max, product) => (product.id && product.id > max ? product.id : max), 0);
-    const productWithId: Product = {
-      id: maxId + 1,
-      ...newProduct,
-      isActive: newProduct.isActive ?? true, // Ensure isActive has a default if not provided
-    };
-    allProducts.value.push(productWithId);
-    saveProductsToLocalStorage();
-  }
-
-  function updateProduct(updatedProduct: Product) {
-    const index = allProducts.value.findIndex(prod => prod.id === updatedProduct.id);
-    if (index !== -1) {
-      allProducts.value[index] = updatedProduct;
-      saveProductsToLocalStorage();
-    }
-  }
-
-  function deleteProduct(id: number) {
-    allProducts.value = allProducts.value.filter(product => product.id !== id);
-    saveProductsToLocalStorage();
-  }
-
-  // Modal Actions
-  function openAddModal() {
-    selectedProduct.value = null;
-    showFormModal.value = true;
-  }
-
-  function openEditModal(product: Product) {
-    selectedProduct.value = product;
-    showFormModal.value = true;
-  }
-
-  function closeFormModal() {
-    showFormModal.value = false;
-    selectedProduct.value = null;
-  }
-
-  function handleSubmitForm(formData: Product) {
-    if (formData.id) {
-      updateProduct(formData);
-    }
-    else {
-      addProduct(formData);
-    }
-    closeFormModal();
-  }
+  fetchProducts()
 
   return {
+    // State
+    products, 
+    isLoading,
+    error,
     search,
     currentPage,
     pageSize,
-    allProducts,
-    totalProducts,
+    totalElements,
     totalPages,
-    paginatedProducts,
-    setCurrentPage,
+    
+    // Actions API
+    fetchProducts,
     addProduct,
     updateProduct,
     deleteProduct,
-    filteredProducts,
-    // Expose modal state and actions
+    setCurrentPage,
+
+    // Modal & UI
     showFormModal,
     selectedProduct,
     openAddModal,

@@ -15,8 +15,8 @@
       </div>
       <div class="grid grid-cols-2 gap-4 mb-4">
         <div class="form-group">
-          <label for="costPrice">Cost Price:</label>
-          <input type="number" id="costPrice" v-model.number="formData.costPrice" required />
+          <label for="buyingPrice">Buying Price:</label>
+          <input type="number" id="buyingPrice" v-model.number="formData.buyingPrice" required />
         </div>
         <div class="form-group">
           <label for="salePrice">Sale Price:</label>
@@ -44,7 +44,7 @@
         <label for="category">Category:</label>
         <select id="category" v-model.number="formData.categoryId">
           <option :value="null">Select Category</option>
-          <option v-for="category in categoryStore.allCategories" :key="category.id" :value="category.id">{{ category.name }}</option>
+          <option v-for="category in categoryStore.categories" :key="category.id" :value="category.id">{{ category.name }}</option>
         </select>
       </div>
       <div class="form-group flex items-center">
@@ -70,7 +70,7 @@ interface Product {
   barcode: string;
   name: string;
   description?: string;
-  costPrice: number;
+  buyingPrice: number;
   salePrice: number;
   stock: number;
   picturePath?: string;
@@ -93,7 +93,7 @@ const formData = ref<Product>({
   barcode: '',
   name: '',
   description: '',
-  costPrice: 0,
+  buyingPrice: 0,
   salePrice: 0,
   stock: 0,
   picturePath: '',
@@ -113,7 +113,7 @@ watch(() => props.show, (newVal) => {
         barcode: '',
         name: '',
         description: '',
-        costPrice: 0,
+        buyingPrice: 0,
         salePrice: 0,
         stock: 0,
         picturePath: '',
@@ -133,7 +133,7 @@ watch(() => props.product, (newVal) => {
       barcode: '',
       name: '',
       description: '',
-      costPrice: 0,
+      buyingPrice: 0,
       salePrice: 0,
       stock: 0,
       picturePath: '',

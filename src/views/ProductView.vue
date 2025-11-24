@@ -11,7 +11,7 @@ interface Product {
   barcode: string;
   name: string;
   description?: string;
-  costPrice: number;
+  buyingPrice: number;
   salePrice: number;
   stock: number;
   picturePath?: string;
@@ -58,17 +58,17 @@ const handleDelete = (product: Product) => {
           <tr>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Barcode</th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Product Name</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Cost Price</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Buying Price</th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Sale Price</th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Stock</th>
             <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-200 uppercase tracking-wider">Action</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200 border-t border-gray-200">
-          <tr v-for="(product) in productStore.paginatedProducts" :key="product.id" class="hover:bg-gray-50">
+          <tr v-for="(product) in productStore.products" :key="product.id" class="hover:bg-gray-50">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ product.barcode }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.name }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatPrice(product.costPrice) }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatPrice(product.buyingPrice) }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatPrice(product.salePrice) }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.stock }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -91,7 +91,7 @@ const handleDelete = (product: Product) => {
       </table>
     </div>
     <div class="sm:hidden">
-        <div v-for="(product) in productStore.paginatedProducts" :key="product.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
+        <div v-for="(product) in productStore.products" :key="product.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
             <div class="flex justify-between items-start mb-2">
                 <div>
                     <span class="font-bold text-gray-800">{{ product.name }}</span>
@@ -103,8 +103,8 @@ const handleDelete = (product: Product) => {
             </div>
             <div class="text-sm text-gray-600 mb-4">
                 <div class="flex justify-between">
-                    <span>Cost Price:</span>
-                    <span>{{ formatPrice(product.costPrice) }}</span>
+                    <span>Buying Price:</span>
+                    <span>{{ formatPrice(product.buyingPrice) }}</span>
                 </div>
                 <div class="flex justify-between">
                     <span>Sale Price:</span>
@@ -131,7 +131,7 @@ const handleDelete = (product: Product) => {
     <Pagination
       :current-page="productStore.currentPage"
       :total-pages="productStore.totalPages"
-      :total-items="productStore.totalProducts"
+      :total-items="productStore.totalElements"
       :page-size="productStore.pageSize"
       @page-changed="productStore.setCurrentPage"
     />
