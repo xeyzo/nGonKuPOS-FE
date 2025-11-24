@@ -27,7 +27,7 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200 border-t border-gray-200">
-          <tr v-for="(category, index) in categoryStore.paginatedCategories" :key="category.id" class="hover:bg-gray-50">
+          <tr v-for="(category, index) in categoryStore.categories" :key="category.id" class="hover:bg-gray-50">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ category.id }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ category.name }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ (categoryStore.currentPage - 1) * categoryStore.pageSize + index + 1 }}</td>
@@ -51,7 +51,7 @@
       </table>
     </div>
     <div class="sm:hidden">
-      <div v-for="(category, index) in categoryStore.paginatedCategories" :key="category.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
+      <div v-for="(category, index) in categoryStore.categories" :key="category.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
         <div class="flex justify-between items-center mb-2">
           <span class="font-bold text-gray-800">{{ category.name }}</span>
           <span class="text-sm text-gray-500">#{{ category.id }}</span>
@@ -79,7 +79,7 @@
         <Pagination
           :current-page="categoryStore.currentPage"
           :total-pages="categoryStore.totalPages"
-          :total-items="categoryStore.totalCategories"
+          :total-items="categoryStore.totalElements"
           :page-size="categoryStore.pageSize"
           @page-changed="categoryStore.setCurrentPage"
         />
@@ -91,7 +91,7 @@
 <script setup lang="ts">
 import { useCategoryStore } from '@/stores/useCategory';
 import { useUiStore } from '@/stores/ui';
-import ThePagination from '@/components/commons/Pagination.vue';
+import Pagination from '@/components/commons/Pagination.vue';
 import CategoryFormModal from '@/components/category/CategoryFormModal.vue';
 import { storeToRefs } from 'pinia';
 

@@ -17,6 +17,20 @@ export default defineConfig({
       filename: 'dist/stats.html',
     }),
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://pos.gonku.my.id',
+        changeOrigin: true,
+        secure: false,
+        configure: (proxy, _options) => {
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            proxyReq.removeHeader('Origin');
+          });
+        },
+      },
+    },
+  },  
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
