@@ -3,18 +3,13 @@ import { useUomStore } from '@/stores/useUom';
 import { useUiStore } from '@/stores/ui';
 import Pagination from '@/components/commons/Pagination.vue';
 import UomFormModal from '@/components/uom/UomFormModal.vue';
-import type { Uom } from '@/components/uom/UomFormModal.vue';
+import type { Uom } from '@/interfaces/UomInterface';
+import { storeToRefs } from 'pinia';
 
 const uomStore = useUomStore();
 const uiStore = useUiStore();
 
-const handleFormSubmit = (uom: Uom) => {
-  if (uom.id) {
-    uomStore.updateUom(uom);
-  } else {
-    uomStore.addUom(uom);
-  }
-};
+const { uoms, isLoading, currentPage, totalPages, totalElements, pageSize, showFormModal, selectedUom } = storeToRefs(uomStore);
 
 const handleDelete = (uom: Uom) => {
   uiStore.openDeleteConfirmationModal(
@@ -39,7 +34,7 @@ const handleDelete = (uom: Uom) => {
           class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
         />
       </div>
-      <button @click="uomStore.openFormModal(null)" class="bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 w-full sm:w-auto">
+      <button @click="uomStore.openAddModal()" class="bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 w-full sm:w-auto">
         New UoM
       </button>
     </div>
@@ -54,12 +49,22 @@ const handleDelete = (uom: Uom) => {
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200 border-t border-gray-200">
-          <tr v-for="uom in uomStore.paginatedUoms" :key="uom.id" class="hover:bg-gray-50">
+          <tr v-if="isLoading">
+            <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+              Loading...
+            </td>
+          </tr>
+          <tr v-else-if="uoms.length === 0">
+            <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+              No data available
+            </td>
+          </tr>
+          <tr v-else v-for="uom in uoms" :key="uom.id" class="hover:bg-gray-50">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ uom.code }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ uom.name }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ uom.symbol }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-              <button @click="uomStore.openFormModal(uom)" class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
+              <button @click="uomStore.openEditModal(uom)" class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                   <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
@@ -78,7 +83,13 @@ const handleDelete = (uom: Uom) => {
       </table>
     </div>
     <div class="sm:hidden">
-      <div v-for="uom in uomStore.paginatedUoms" :key="uom.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
+      <div v-if="isLoading" class="text-center text-gray-500 py-4">
+        Loading...
+      </div>
+      <div v-else-if="uoms.length === 0" class="text-center text-gray-500 py-4">
+        No data available
+      </div>
+      <div v-else v-for="uom in uoms" :key="uom.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
         <div class="flex justify-between items-center mb-2">
           <span class="font-bold text-gray-800">{{ uom.name }}</span>
           <span class="text-sm text-gray-500">#{{ uom.code }}</span>
@@ -87,7 +98,7 @@ const handleDelete = (uom: Uom) => {
           Symbol: {{ uom.symbol }}
         </div>
         <div class="flex justify-end">
-          <button @click="uomStore.openFormModal(uom)" class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
+          <button @click="uomStore.openEditModal(uom)" class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
               <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
               <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
@@ -104,17 +115,17 @@ const handleDelete = (uom: Uom) => {
       </div>
     </div>
     <Pagination
-      :current-page="uomStore.currentPage"
-      :total-pages="uomStore.totalPages"
-      :total-items="uomStore.totalUoms"
-      :page-size="uomStore.pageSize"
+      :current-page="currentPage"
+      :total-pages="totalPages"
+      :total-items="totalElements"
+      :page-size="pageSize"
       @page-changed="uomStore.setCurrentPage"
     />
     <UomFormModal
-      :show="uomStore.isFormModalOpen"
-      :uom="uomStore.editingUom"
+      :show="showFormModal"
+      :uom="selectedUom"
       @close="uomStore.closeFormModal"
-      @submit-form="handleFormSubmit"
+      @submit-form="uomStore.handleSubmitForm"
     />
   </div>
 </template>

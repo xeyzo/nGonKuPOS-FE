@@ -23,7 +23,7 @@ interface Product {
 const productStore = useProductStore();
 const uiStore = useUiStore();
 
-const { showFormModal, selectedProduct } = storeToRefs(productStore);
+const { showFormModal, selectedProduct, products, isLoading, currentPage, totalPages, totalElements, pageSize } = storeToRefs(productStore);
 
 const handleDelete = (product: Product) => {
   uiStore.openDeleteConfirmationModal(
@@ -65,7 +65,17 @@ const handleDelete = (product: Product) => {
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200 border-t border-gray-200">
-          <tr v-for="(product) in productStore.products" :key="product.id" class="hover:bg-gray-50">
+          <tr v-if="isLoading">
+            <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+              Loading...
+            </td>
+          </tr>
+          <tr v-else-if="products.length === 0">
+            <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+              No data available
+            </td>
+          </tr>
+          <tr v-else v-for="(product) in products" :key="product.id" class="hover:bg-gray-50">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ product.barcode }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.name }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatPrice(product.buyingPrice) }}</td>
@@ -91,7 +101,13 @@ const handleDelete = (product: Product) => {
       </table>
     </div>
     <div class="sm:hidden">
-        <div v-for="(product) in productStore.products" :key="product.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
+        <div v-if="isLoading" class="text-center text-gray-500 py-4">
+          Loading...
+        </div>
+        <div v-else-if="products.length === 0" class="text-center text-gray-500 py-4">
+          No data available
+        </div>
+        <div v-else v-for="(product) in products" :key="product.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
             <div class="flex justify-between items-start mb-2">
                 <div>
                     <span class="font-bold text-gray-800">{{ product.name }}</span>
@@ -129,10 +145,10 @@ const handleDelete = (product: Product) => {
         </div>
     </div>
     <Pagination
-      :current-page="productStore.currentPage"
-      :total-pages="productStore.totalPages"
-      :total-items="productStore.totalElements"
-      :page-size="productStore.pageSize"
+      :current-page="currentPage"
+      :total-pages="totalPages"
+      :total-items="totalElements"
+      :page-size="pageSize"
       @page-changed="productStore.setCurrentPage"
     />
   </div>

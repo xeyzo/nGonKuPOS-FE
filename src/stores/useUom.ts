@@ -1,110 +1,172 @@
-import { ref, computed, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
-import allUomsData from '@/dummy/uom.json'
-import type { Uom } from '@/components/uom/UomFormModal.vue'
+import { watchDebounced } from '@vueuse/core'
+import axiosClient from '@/api/axiosClient'
+import type { UomResponse, Uom } from '@/interfaces/UomInterface'
 
-const LOCAL_STORAGE_KEY = 'uoms';
+interface ApiError {
+  response?: {
+    data?: {
+      message?: string
+    }
+  }
+}
 
 export const useUomStore = defineStore('uom', () => {
+  const uoms = ref<Uom[]>([])
+  const isLoading = ref(false)
+  const error = ref<string | null>(null)
+
   const search = ref('')
   const currentPage = ref(1)
   const pageSize = ref(5)
-  const isFormModalOpen = ref(false)
-  const editingUom = ref<Uom | null>(null)
+  const totalElements = ref(0)
+  const totalPages = ref(0)
 
-  const allUoms = ref<Uom[]>(loadUomsFromLocalStorage());
+  const showFormModal = ref(false)
+  const selectedUom = ref<Uom | null>(null)
 
-  watch(search, () => {
-    currentPage.value = 1
-  })
+  async function fetchUoms() {
+    isLoading.value = true
+    error.value = null
+    
+    try {
+      const params: { page: number, size: number, search?: string } = {
+        page: currentPage.value - 1,
+        size: pageSize.value
+      }
+      if (search.value) {
+        params.search = search.value
+      }
 
-  const filteredUoms = computed(() => {
-    if (!search.value) {
-      return allUoms.value
+      const response = await axiosClient.get<UomResponse>('/uom', { params })
+
+      const result = response.data.data
+
+      uoms.value = result.content
+      totalElements.value = result.totalElements
+      totalPages.value = result.totalPages
+
+    } catch (err) {
+      const apiError = err as ApiError
+      console.error(apiError)
+      error.value = apiError.response?.data?.message || 'Gagal mengambil data UOM'
+    } finally {
+      isLoading.value = false
     }
-    return allUoms.value.filter((uom) =>
-      uom.name.toLowerCase().includes(search.value.toLowerCase())
-    )
+  }
+
+  async function addUom(newUom: Uom) {
+    isLoading.value = true
+    try {
+      await axiosClient.post('/uom', newUom)
+      await fetchUoms()
+    } catch (err) {
+      error.value = 'Gagal menambah UOM'
+      throw err
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function updateUom(updatedUom: Uom) {
+    if (!updatedUom.id) return
+    isLoading.value = true
+    try {
+      await axiosClient.put(`/uom/${updatedUom.id}`, updatedUom)
+      await fetchUoms()
+    } catch (err) {
+      error.value = 'Gagal update UOM'
+      throw err
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function deleteUom(id: number) {    
+    isLoading.value = true
+    try {
+      await axiosClient.delete(`/uom/${id}`)
+      await fetchUoms()
+      
+      if (uoms.value.length === 1 && currentPage.value > 1) {
+        currentPage.value--
+        await fetchUoms()
+      }
+    } catch {
+      error.value = 'Gagal menghapus UOM'
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  
+  watchDebounced(search, () => {
+    currentPage.value = 1
+    fetchUoms()
+  }, { debounce: 500, maxWait: 2000 })
+
+  watch(currentPage, () => {
+    fetchUoms()
   })
 
-  const totalUoms = computed(() => filteredUoms.value.length)
+  function openAddModal() {
+    selectedUom.value = null
+    showFormModal.value = true
+  }
 
-  const totalPages = computed(() => Math.ceil(totalUoms.value / pageSize.value))
+  function openEditModal(uom: Uom) {
+    selectedUom.value = { ...uom } 
+    showFormModal.value = true
+  }
 
-  const paginatedUoms = computed(() => {
-    const startIndex = (currentPage.value - 1) * pageSize.value
-    const endIndex = startIndex + pageSize.value
-    return filteredUoms.value.slice(startIndex, endIndex)
-  })
+  function closeFormModal() {
+    showFormModal.value = false
+    selectedUom.value = null
+  }
+
+  function handleSubmitForm(formData: Uom) {
+    if (formData.id) {
+      updateUom(formData)
+        .then(() => closeFormModal())
+        .catch(() => console.log('Gagal mengupdate UOM'))
+    } else {
+      addUom(formData)
+        .then(() => closeFormModal())
+        .catch(() => console.log('Gagal menambah UOM'))
+    }
+  }
 
   function setCurrentPage(page: number) {
     currentPage.value = page
   }
 
-  function saveUomsToLocalStorage() {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allUoms.value));
-  }
-
-  function loadUomsFromLocalStorage(): Uom[] {
-    const storedUoms = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (storedUoms) {
-      try {
-        return JSON.parse(storedUoms);
-      } catch (e) {
-        console.error("Error parsing uoms from localStorage", e);
-        return allUomsData.data.content;
-      }
-    }
-    return allUomsData.data.content;
-  }
-
-  function openFormModal(uom: Uom | null = null) {
-    editingUom.value = uom
-    isFormModalOpen.value = true
-  }
-
-  function closeFormModal() {
-    isFormModalOpen.value = false
-    editingUom.value = null
-  }
-
-  function addUom(uom: Uom) {
-    const maxId = allUoms.value.reduce((max, uom) => (uom.id && uom.id > max ? uom.id : max), 0);
-    const newUom = { ...uom, id: maxId + 1 }
-    allUoms.value.unshift(newUom)
-    saveUomsToLocalStorage();
-    closeFormModal()
-  }
-
-  function updateUom(updatedUom: Uom) {
-    const index = allUoms.value.findIndex((uom) => uom.id === updatedUom.id)
-    if (index !== -1) {
-      allUoms.value[index] = updatedUom
-      saveUomsToLocalStorage();
-    }
-    closeFormModal()
-  }
-
-  function deleteUom(uomId: number) {
-    allUoms.value = allUoms.value.filter((uom) => uom.id !== uomId)
-    saveUomsToLocalStorage();
-  }
+  fetchUoms()
 
   return {
-    allUoms,
+    // State
+    uoms, 
+    isLoading,
+    error,
     search,
     currentPage,
     pageSize,
-    totalUoms,
+    totalElements,
     totalPages,
-    paginatedUoms,
-    setCurrentPage,
-    isFormModalOpen,
-    editingUom,
-    openFormModal,
-    closeFormModal,
+    
+    // Actions API
+    fetchUoms,
     addUom,
     updateUom,
-    deleteUom
+    deleteUom,
+    setCurrentPage,
+
+    // Modal & UI
+    showFormModal,
+    selectedUom,
+    openAddModal,
+    openEditModal,
+    closeFormModal,
+    handleSubmitForm,
   }
 })

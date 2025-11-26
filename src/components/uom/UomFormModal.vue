@@ -13,6 +13,14 @@
         <label for="uomSymbol">UoM Symbol:</label>
         <input type="text" id="uomSymbol" v-model="formData.symbol" required />
       </div>
+      <div class="form-group">
+        <label for="uomDescription">Description:</label>
+        <textarea id="uomDescription" v-model="formData.description"></textarea>
+      </div>
+      <div class="form-group flex items-center">
+        <input type="checkbox" id="isActive" v-model="formData.isActive" class="mr-2 leading-tight" />
+        <label for="isActive">Is Active</label>
+      </div>
     </form>
     <template #footer>
       <button type="submit" class="btn btn-primary" @click="submitForm">{{ isEditing ? 'Update UoM' : 'Add UoM' }}</button>
@@ -24,13 +32,7 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
 import BaseModal from '@/components/commons/BaseModal.vue';
-
-export interface Uom {
-  id?: number;
-  code: string;
-  name: string;
-  symbol: string;
-}
+import type { Uom } from '@/interfaces/UomInterface';
 
 const props = defineProps<{
   show: boolean;
@@ -39,7 +41,15 @@ const props = defineProps<{
 
 const emit = defineEmits(['close', 'submit-form']);
 
-const formData = ref<Uom>({ code: '', name: '', symbol: '' });
+const getInitialFormData = (): Uom => ({
+  name: '',
+  code: '',
+  symbol: '',
+  description: '',
+  isActive: true,
+});
+
+const formData = ref<Uom>(getInitialFormData());
 
 const isEditing = computed(() => !!props.uom && props.uom.id !== undefined);
 
@@ -48,7 +58,7 @@ watch(() => props.show, (newVal) => {
     if (props.uom) {
       formData.value = { ...props.uom };
     } else {
-      formData.value = { code: '', name: '', symbol: '' };
+      formData.value = getInitialFormData();
     }
   }
 }, { immediate: true });
@@ -57,7 +67,7 @@ watch(() => props.uom, (newVal) => {
   if (props.show && newVal) {
     formData.value = { ...newVal };
   } else if (props.show && !newVal) {
-    formData.value = { code: '', name: '', symbol: '' };
+    formData.value = getInitialFormData();
   }
 });
 
@@ -83,12 +93,17 @@ label {
 }
 
 input[type="text"],
-textarea {
+textarea,
+input[type="checkbox"] {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+  width: auto;
 }
 
 textarea {

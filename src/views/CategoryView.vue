@@ -27,10 +27,20 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200 border-t border-gray-200">
-          <tr v-for="(category, index) in categoryStore.categories" :key="category.id" class="hover:bg-gray-50">
+          <tr v-if="isLoading">
+            <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+              Loading...
+            </td>
+          </tr>
+          <tr v-else-if="categories.length === 0">
+            <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+              No data available
+            </td>
+          </tr>
+          <tr v-else v-for="(category, index) in categories" :key="category.id" class="hover:bg-gray-50">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ category.id }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ category.name }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ (categoryStore.currentPage - 1) * categoryStore.pageSize + index + 1 }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ (currentPage - 1) * pageSize + index + 1 }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
               <button @click="categoryStore.openEditModal(category)" class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -51,13 +61,19 @@
       </table>
     </div>
     <div class="sm:hidden">
-      <div v-for="(category, index) in categoryStore.categories" :key="category.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
+      <div v-if="isLoading" class="text-center text-gray-500 py-4">
+        Loading...
+      </div>
+      <div v-else-if="categories.length === 0" class="text-center text-gray-500 py-4">
+        No data available
+      </div>
+      <div v-else v-for="(category, index) in categories" :key="category.id" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
         <div class="flex justify-between items-center mb-2">
           <span class="font-bold text-gray-800">{{ category.name }}</span>
           <span class="text-sm text-gray-500">#{{ category.id }}</span>
         </div>
         <div class="text-sm text-gray-600 mb-4">
-          Sequence: {{ (categoryStore.currentPage - 1) * categoryStore.pageSize + index + 1 }}
+          Sequence: {{ (currentPage - 1) * pageSize + index + 1 }}
         </div>
         <div class="flex justify-end">
           <button @click="categoryStore.openEditModal(category)" class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
@@ -77,10 +93,10 @@
           </div>
         </div>
         <Pagination
-          :current-page="categoryStore.currentPage"
-          :total-pages="categoryStore.totalPages"
-          :total-items="categoryStore.totalElements"
-          :page-size="categoryStore.pageSize"
+          :current-page="currentPage"
+          :total-pages="totalPages"
+          :total-items="totalElements"
+          :page-size="pageSize"
           @page-changed="categoryStore.setCurrentPage"
         />
       </div>
@@ -104,7 +120,7 @@ interface Category {
 const categoryStore = useCategoryStore();
 const uiStore = useUiStore();
 
-const { showFormModal, selectedCategory } = storeToRefs(categoryStore);
+const { showFormModal, selectedCategory, isLoading, categories, currentPage, totalPages, totalElements, pageSize } = storeToRefs(categoryStore);
 
 const handleDelete = (category: Category) => {
   uiStore.openDeleteConfirmationModal(

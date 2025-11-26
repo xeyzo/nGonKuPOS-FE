@@ -37,7 +37,7 @@
         <label for="uom">Unit of Measure:</label>
         <select id="uom" v-model.number="formData.uomId">
           <option :value="null">Select UOM</option>
-          <option v-for="uom in uomStore.allUoms" :key="uom.id" :value="uom.id">{{ uom.name }}</option>
+          <option v-for="uom in uomStore.uoms" :key="uom.id" :value="uom.id">{{ uom.name }}</option>
         </select>
       </div>
       <div class="form-group">
