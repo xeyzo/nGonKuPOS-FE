@@ -1,5 +1,10 @@
 <template>
-  <BaseModal :show="show" :title="isEditing ? 'Edit Category' : 'Add New Category'" @close="close">
+  <BaseModal
+    :show="show"
+    :title="isEditing ? 'Edit Category' : 'Add New Category'"
+    content-class="bg-[#fef1d6]"
+    @close="close"
+  >
     <form @submit.prevent="submitForm">
       <div class="form-group">
         <label for="categoryName">Category Name:</label>

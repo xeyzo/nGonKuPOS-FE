@@ -1,5 +1,10 @@
 <template>
-  <BaseModal :show="show" :title="isEditing ? 'Edit Product' : 'Add New Product'" @close="close">
+  <BaseModal
+    :show="show"
+    :title="isEditing ? 'Edit Product' : 'Add New Product'"
+    content-class="bg-[#fef1d6]"
+    @close="close"
+  >
     <form @submit.prevent="submitForm">
       <div class="form-group">
         <label for="barcode">Barcode:</label>

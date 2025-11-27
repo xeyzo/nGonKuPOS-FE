@@ -1,39 +1,53 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useOrderStore, type Order, type OrderItem } from '@/stores/useOrder'
-import productsData from '@/dummy/product.json'
-import categoriesData from '@/dummy/category.json'
+import { useOrderStore } from '@/stores/useOrder'
+import { useProductStore } from '@/stores/useProduct'
+import { useCategoryStore } from '@/stores/useCategory'
+import { storeToRefs } from 'pinia'
 import Pagination from '@/components/commons/Pagination.vue'
+import type { OrderItem, Order, OrderPayload } from '@/interfaces/OrderInterface'
+import type { Product } from '@/interfaces/ProductInterface'
+import type { Category } from '@/interfaces/CategoryInterface'
 
-interface Product {
-  id: number
-  name: string
-  salePrice: number
-  categoryId: number | null
-}
-
-interface Category {
-  id: number
-  name: string
-}
+import OrderCheckoutModal from '@/components/order/OrderCheckoutModal.vue'
 
 const router = useRouter()
 const orderStore = useOrderStore()
+const productStore = useProductStore()
+const categoryStore = useCategoryStore()
 
-const products = ref<Product[]>(productsData.data.content)
-const categories = ref<Category[]>(categoriesData.data.content)
+const { allProducts: products } = storeToRefs(productStore)
+const { allCategories: categories } = storeToRefs(categoryStore)
+
+onMounted(async () => {
+  await Promise.all([productStore.fetchAllProducts(), categoryStore.fetchAllCategories()])
+  if (categories.value.length > 0) {
+    selectedCategory.value = categories.value[0]?.id || null
+  }
+})
+
 const order = ref<{
   customerName: string
   tableNumber: string
   items: OrderItem[]
-}>({
+}> ({
   customerName: '',
   tableNumber: '',
   items: []
 })
 
-const selectedCategory = ref<number | null>(categories.value[0]?.id ?? null)
+const isCheckoutModalVisible = ref(false)
+
+const openCheckoutModal = () => {
+  isCheckoutModalVisible.value = true
+}
+
+const closeCheckoutModal = () => {
+  isCheckoutModalVisible.value = false
+}
+
+const selectedCategory = ref<number | null>(null)
 
 const filteredProducts = computed(() => {
   if (selectedCategory.value === null) {
@@ -64,11 +78,13 @@ const addProductToOrder = (product: Product) => {
   if (existingItem) {
     existingItem.quantity++
   } else {
+    const category = categories.value.find((c) => c.id === product.categoryId)
     order.value.items.push({
-      id: product.id,
+      id: product.id as number,
       name: product.name,
       price: product.salePrice,
-      quantity: 1
+      quantity: 1,
+      categoryName: category ? category.name : 'Uncategorized'
     })
   }
 }
@@ -103,25 +119,41 @@ const totalAmount = computed(() => {
   return subtotal.value - discount.value + taxAmount.value
 })
 
-const submitOrder = () => {
-  const newOrder: Order = {
-    id: Date.now(),
-    receiptNumber: `ORD-${Date.now()}`,
-    orderDate: new Date().toISOString().split('T')[0] ?? '',
-    status: 'NEW',
+const handleCheckoutConfirm = (checkoutData: {
+  paymentMethod: string
+  paidAmount: number
+  notes: string
+}) => {
+  const orderPayloadForAPI: OrderPayload = {
     outletName: 'POS Cafe Alpha',
     customerName: order.value.customerName,
     tableNumber: order.value.tableNumber,
-    totalAmount: totalAmount.value,
-    items: order.value.items,
-    discountTotal: discount.value,
-    subtotal: subtotal.value,
-    taxTotal: taxAmount.value,
-    paidAmount: 0,
-    changeAmount: 0,
-    notes: ''
+    discountTotal: 0,
+    notes: checkoutData.notes || 'Dine-in order',
+    items: order.value.items.map((item) => ({
+      productId: item.id,
+      quantity: item.quantity,
+      discount: 0
+    })),
+    payments: [
+      {
+        paymentMethod: checkoutData.paymentMethod.toUpperCase(),
+        amount: checkoutData.paidAmount,
+        notes: 'Paid in full'
+      }
+    ]
   }
-  orderStore.createOrder(newOrder)
+
+  orderStore.createOrder(orderPayloadForAPI, {
+    ...order.value,
+    ...checkoutData,
+    totalAmount: totalAmount.value,
+    subtotal: subtotal.value,
+    discountTotal: discount.value,
+    taxTotal: taxAmount.value,
+    changeAmount: checkoutData.paidAmount - totalAmount.value,
+  })
+  closeCheckoutModal()
   router.push('/order')
 }
 
@@ -134,7 +166,7 @@ const selectCategory = (categoryId: number) => {
 <template>
   <div class="bg-white p-4 sm:p-6 rounded-lg shadow-xl border border-gray-200 h-full">
     <h1 class="text-2xl font-bold mb-6">Create Order</h1>
-    <form @submit.prevent="submitOrder" class="flex flex-col h-full">
+    <form @submit.prevent="openCheckoutModal" class="flex flex-col h-full">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div class="form-group">
           <label for="customerName" class="block text-sm font-medium text-gray-700"
@@ -170,7 +202,7 @@ const selectCategory = (categoryId: number) => {
                 v-for="category in categories"
                 :key="category.id"
                 type="button"
-                @click="selectCategory(category.id)"
+                @click="selectCategory(category.id as number)"
                 :class="[
                   'whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm mr-4',
                   selectedCategory === category.id
@@ -307,7 +339,7 @@ const selectCategory = (categoryId: number) => {
               </div>
               <div class="flex justify-between text-gray-600">
                 <span>Discount</span>
-                <span class="text-green-600">- Rp {{ discount.toLocaleString() }}</span>
+                <span class="text-red-600">- Rp {{ discount.toLocaleString() }}</span>
               </div>
               <div class="flex justify-between text-gray-600">
                 <span>Tax ({{ taxPercentage * 100 }}%)</span>
@@ -331,5 +363,11 @@ const selectCategory = (categoryId: number) => {
         </div>
       </div>
     </form>
+    <OrderCheckoutModal
+      :show="isCheckoutModalVisible"
+      :total-amount="totalAmount"
+      @confirm="handleCheckoutConfirm"
+      @close="closeCheckoutModal"
+    />
   </div>
 </template>

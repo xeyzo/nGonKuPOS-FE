@@ -1,7 +1,3 @@
-export const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    minimumFractionDigits: 0,
-  }).format(price);
-};
+export const formatCurrency = (price: number) => {
+  return `Rp ${price.toLocaleString('id-ID')}`
+}

@@ -2,7 +2,7 @@ import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { watchDebounced } from '@vueuse/core'
 import axiosClient from '@/api/axiosClient'
-import type { ProductResponse, Product } from '@/interfaces/ProductInterface'
+import type { ProductResponse, Product, ProductPayload } from '@/interfaces/ProductInterface'
 
 interface ApiError {
   response?: {
@@ -14,6 +14,7 @@ interface ApiError {
 
 export const useProductStore = defineStore('product', () => {
   const products = ref<Product[]>([])
+  const allProducts = ref<Product[]>([])
   const isLoading = ref(false)
   const error = ref<string | null>(null)
 
@@ -60,7 +61,13 @@ export const useProductStore = defineStore('product', () => {
   async function addProduct(newProduct: Product) {
     isLoading.value = true
     try {
-      await axiosClient.post('/products', newProduct)
+      const payload: ProductPayload = {
+        ...newProduct,
+        costPrice: newProduct.buyingPrice,
+        categoryId: newProduct.categoryId || null,
+        uomId: newProduct.uomId || null
+      }
+      await axiosClient.post('/products', payload)
       await fetchProducts()
     } catch (err) {
       error.value = 'Gagal menambah produk'
@@ -74,7 +81,13 @@ export const useProductStore = defineStore('product', () => {
     if (!updatedProduct.id) return
     isLoading.value = true
     try {
-      await axiosClient.put(`/products/${updatedProduct.id}`, updatedProduct)
+      const payload: ProductPayload = {
+        ...updatedProduct,
+        costPrice: updatedProduct.buyingPrice,
+        categoryId: updatedProduct.categoryId || null,
+        uomId: updatedProduct.uomId || null
+      }
+      await axiosClient.put(`/products/${updatedProduct.id}`, payload)
       await fetchProducts()
     } catch (err) {
       error.value = 'Gagal update produk'
@@ -144,9 +157,21 @@ export const useProductStore = defineStore('product', () => {
 
   fetchProducts()
 
+  async function fetchAllProducts() {
+    try {
+      const response = await axiosClient.get<ProductResponse>('/products', {
+        params: { page: 0, size: 1000 } // Fetch all products
+      })
+      allProducts.value = response.data.data.content
+    } catch (err) {
+      console.error('Failed to fetch all products', err)
+    }
+  }
+
   return {
     // State
-    products, 
+    products,
+    allProducts,
     isLoading,
     error,
     search,
@@ -154,9 +179,10 @@ export const useProductStore = defineStore('product', () => {
     pageSize,
     totalElements,
     totalPages,
-    
+
     // Actions API
     fetchProducts,
+    fetchAllProducts,
     addProduct,
     updateProduct,
     deleteProduct,
@@ -168,6 +194,6 @@ export const useProductStore = defineStore('product', () => {
     openAddModal,
     openEditModal,
     closeFormModal,
-    handleSubmitForm,
+    handleSubmitForm
   }
 })

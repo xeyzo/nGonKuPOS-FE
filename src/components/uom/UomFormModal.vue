@@ -1,5 +1,10 @@
 <template>
-  <BaseModal :show="show" :title="isEditing ? 'Edit UoM' : 'Add New UoM'" @close="close">
+  <BaseModal
+    :show="show"
+    :title="isEditing ? 'Edit UoM' : 'Add New UoM'"
+    content-class="bg-[#fef1d6]"
+    @close="close"
+  >
     <form @submit.prevent="submitForm">
       <div class="form-group">
         <label for="uomCode">UoM Code:</label>

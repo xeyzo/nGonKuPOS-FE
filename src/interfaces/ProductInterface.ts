@@ -12,6 +12,18 @@ export interface Product {
   categoryId?: number | null;
 }
 
+export interface ProductPayload {
+  barcode: string;
+  name: string;
+  description?: string;
+  costPrice: number;
+  salePrice: number;
+  stock: number;
+  picturePath?: string;
+  categoryId: number | null;
+  uomId: number | null;
+}
+
 
 export interface ProductResponse{
   status: number;

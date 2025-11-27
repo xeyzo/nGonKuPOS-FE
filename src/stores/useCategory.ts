@@ -14,6 +14,7 @@ interface ApiError {
 
 export const useCategoryStore = defineStore('category', () => {
   const categories = ref<Category[]>([])
+  const allCategories = ref<Category[]>([])
   const isLoading = ref(false)
   const error = ref<string | null>(null)
 
@@ -144,9 +145,21 @@ export const useCategoryStore = defineStore('category', () => {
 
   fetchCategories()
 
+  async function fetchAllCategories() {
+    try {
+      const response = await axiosClient.get<CategoryResponse>('/categories', {
+        params: { page: 0, size: 1000 } // Fetch all categories
+      })
+      allCategories.value = response.data.data.content
+    } catch (err) {
+      console.error('Failed to fetch all categories', err)
+    }
+  }
+
   return {
     // State
-    categories, 
+    categories,
+    allCategories,
     isLoading,
     error,
     search,
@@ -154,9 +167,10 @@ export const useCategoryStore = defineStore('category', () => {
     pageSize,
     totalElements,
     totalPages,
-    
+
     // Actions API
     fetchCategories,
+    fetchAllCategories,
     addCategory,
     updateCategory,
     deleteCategory,
@@ -168,6 +182,6 @@ export const useCategoryStore = defineStore('category', () => {
     openAddModal,
     openEditModal,
     closeFormModal,
-    handleSubmitForm,
+    handleSubmitForm
   }
 })

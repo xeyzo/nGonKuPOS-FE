@@ -1,13 +1,48 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { useOrderStore } from '@/stores/useOrder'
-import { computed } from 'vue'
+import { useProductStore } from '@/stores/useProduct'
+import { useCategoryStore } from '@/stores/useCategory'
+import { computed, onMounted } from 'vue'
 
 const route = useRoute()
 const orderStore = useOrderStore()
+const productStore = useProductStore()
+const categoryStore = useCategoryStore()
+
+onMounted(() => {
+  // Ensure master data is loaded for enrichment
+  if (productStore.allProducts.length === 0) {
+    productStore.fetchAllProducts()
+  }
+  if (categoryStore.allCategories.length === 0) {
+    categoryStore.fetchAllCategories()
+  }
+})
 
 const orderId = Number(route.params.id)
 const order = orderStore.getOrderById(orderId)
+
+const enrichedOrderItems = computed(() => {
+  if (!order.value || !order.value.items) return []
+  if (productStore.allProducts.length === 0 || categoryStore.allCategories.length === 0) {
+    // Return original items if master data is not ready
+    return order.value.items
+  }
+
+  return order.value.items.map((item) => {
+    if (item.categoryName) return item // Already enriched
+
+    const product = productStore.allProducts.find((p) => p.id === item.id)
+    if (!product) return { ...item, categoryName: 'Product not found' }
+
+    const category = categoryStore.allCategories.find((c) => c.id === product.categoryId)
+    return {
+      ...item,
+      categoryName: category ? category.name : 'Uncategorized'
+    }
+  })
+})
 
 const subtotal = computed(() => {
   if (!order.value || !order.value.items) return 0
@@ -109,8 +144,11 @@ const statusColor = (status: string) => {
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="item in order.items" :key="item.id">
-              <td class="px-6 py-4 whitespace-nowrap">{{ item.name }}</td>
+            <tr v-for="item in enrichedOrderItems" :key="item.id">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">{{ item.name }}</div>
+                <div class="text-sm text-gray-500">{{ item.categoryName }}</div>
+              </td>
               <td class="px-6 py-4 whitespace-nowrap">{{ item.quantity }}</td>
               <td class="px-6 py-4 whitespace-nowrap">Rp {{ item.price.toLocaleString() }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-right">
@@ -140,6 +178,25 @@ const statusColor = (status: string) => {
         <div class="flex justify-between font-bold text-lg border-t pt-2">
           <span>Total:</span>
           <span>Rp {{ total.toLocaleString() }}</span>
+        </div>
+        <div class="mt-4 border-t pt-4">
+          <h3 class="font-bold text-lg mb-2">Payment Details</h3>
+          <div class="flex justify-between mb-2">
+            <span class="text-gray-600">Payment Method:</span>
+            <span>{{ order.paymentMethod }}</span>
+          </div>
+          <div class="flex justify-between mb-2">
+            <span class="text-gray-600">Paid Amount:</span>
+            <span>Rp {{ order.paidAmount.toLocaleString() }}</span>
+          </div>
+          <div class="flex justify-between mb-2">
+            <span class="text-gray-600">Change:</span>
+            <span>Rp {{ order.changeAmount.toLocaleString() }}</span>
+          </div>
+          <div v-if="order.notes" class="mt-2">
+            <span class="text-gray-600">Notes:</span>
+            <p class="text-sm">{{ order.notes }}</p>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Order } from '@/interfaces/OrderInterface'
+import type { Order, OrderPayload } from '@/interfaces/OrderInterface'
 import axiosClient from '@/api/axiosClient'
 
 export const useOrderStore = defineStore('order', () => {
@@ -16,6 +16,7 @@ export const useOrderStore = defineStore('order', () => {
 
     loading.value = true
     try {
+      console.log(`Fetching orders page ${currentPage.value}...`)
       const response = await axiosClient.get('/orders', {
         params: {
           page: currentPage.value,
@@ -23,15 +24,20 @@ export const useOrderStore = defineStore('order', () => {
         }
       })
 
-      const newOrders = response.data.data.content
+      const responseData = response.data.data
+      const newOrders = responseData.content
+      console.log(`Received ${newOrders.length} orders.`)
+
       if (newOrders.length > 0) {
         orders.value.push(...newOrders)
         currentPage.value++
       }
 
-      if (currentPage.value > response.data.data.totalPages) {
+      if (currentPage.value > responseData.totalPages) {
         hasMore.value = false
+        console.log('No more orders to fetch.')
       }
+      totalPages.value = responseData.totalPages
     } catch (error) {
       console.error('Error fetching orders:', error)
     } finally {
@@ -39,13 +45,34 @@ export const useOrderStore = defineStore('order', () => {
     }
   }
 
-  const createOrder = (order: Order) => {
-    // allOrders.value.unshift(order)
-    // orders.value.unshift(order)
+  const createOrder = (payload: OrderPayload, orderDataForUI: any) => {
+    console.log('--- Sending Order Payload to API ---')
+    console.log(JSON.stringify(payload, null, 2))
+    console.log('------------------------------------')
+
+    const newOrderForUI: Order = {
+      id: Date.now(),
+      receiptNumber: `ORD-${Date.now()}`,
+      orderDate: new Date().toISOString().split('T')[0] ?? '',
+      status: 'PAID',
+      outletName: payload.outletName,
+      customerName: payload.customerName,
+      tableNumber: payload.tableNumber,
+      totalAmount: orderDataForUI.totalAmount,
+      items: orderDataForUI.items,
+      paymentMethod: orderDataForUI.paymentMethod,
+      discountTotal: orderDataForUI.discountTotal,
+      subtotal: orderDataForUI.subtotal,
+      taxTotal: orderDataForUI.taxTotal,
+      paidAmount: orderDataForUI.paidAmount,
+      changeAmount: orderDataForUI.changeAmount,
+      notes: payload.notes
+    }
+    orders.value.unshift(newOrderForUI)
   }
 
   const getOrderById = (id: number) => {
-    // return computed(() => allOrders.value.find((order) => order.id === id))
+    return computed(() => orders.value.find((order) => order.id === id))
   }
 
   const resetOrders = () => {
@@ -61,6 +88,8 @@ export const useOrderStore = defineStore('order', () => {
     getOrderById,
     hasMore,
     loading,
-    resetOrders
+    resetOrders,
+    totalPages,
+    currentPage
   }
 })

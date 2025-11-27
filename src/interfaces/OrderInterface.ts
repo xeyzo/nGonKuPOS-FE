@@ -3,6 +3,7 @@ export interface OrderItem {
   name: string
   price: number
   quantity: number
+  categoryName?: string
 }
 export interface Order {
   id: number
@@ -12,6 +13,7 @@ export interface Order {
   outletName: string
   customerName: string
   tableNumber: string
+  paymentMethod: string
   discountTotal: number
   subtotal: number
   taxTotal: number
@@ -20,4 +22,27 @@ export interface Order {
   changeAmount: number
   notes: string
   items: OrderItem[]
+}
+
+// New interfaces for the API payload
+export interface OrderItemPayload {
+  productId: number
+  quantity: number
+  discount: number
+}
+
+export interface PaymentPayload {
+  paymentMethod: string
+  amount: number
+  notes: string
+}
+
+export interface OrderPayload {
+  outletName: string
+  customerName: string
+  tableNumber: string
+  discountTotal: number
+  notes: string
+  items: OrderItemPayload[]
+  payments: PaymentPayload[]
 }

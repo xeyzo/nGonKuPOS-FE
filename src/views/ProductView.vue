@@ -3,7 +3,7 @@ import { useProductStore } from '@/stores/useProduct';
 import { useUiStore } from '@/stores/ui';
 import Pagination from '@/components/commons/Pagination.vue';
 import ProductFormModal from '@/components/product/ProductFormModal.vue';
-import { formatPrice } from '@/utils/format';
+import { formatCurrency } from '@/utils/format';
 import { storeToRefs } from 'pinia';
 
 interface Product {
@@ -78,8 +78,8 @@ const handleDelete = (product: Product) => {
           <tr v-else v-for="(product) in products" :key="product.id" class="hover:bg-gray-50">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ product.barcode }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.name }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatPrice(product.buyingPrice) }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatPrice(product.salePrice) }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatCurrency(product.buyingPrice) }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatCurrency(product.salePrice) }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.stock }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
               <button @click="productStore.openEditModal(product)" class="text-indigo-600 hover:text-indigo-900 mr-4 inline-flex items-center">
@@ -120,11 +120,11 @@ const handleDelete = (product: Product) => {
             <div class="text-sm text-gray-600 mb-4">
                 <div class="flex justify-between">
                     <span>Buying Price:</span>
-                    <span>{{ formatPrice(product.buyingPrice) }}</span>
+                    <span>{{ formatCurrency(product.buyingPrice) }}</span>
                 </div>
                 <div class="flex justify-between">
                     <span>Sale Price:</span>
-                    <span>{{ formatPrice(product.salePrice) }}</span>
+                    <span>{{ formatCurrency(product.salePrice) }}</span>
                 </div>
             </div>
             <div class="flex justify-end">

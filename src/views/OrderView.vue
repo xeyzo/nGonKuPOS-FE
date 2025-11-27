@@ -116,6 +116,9 @@ onUnmounted(() => {
         <div class="text-sm text-gray-600 mb-1">
           Table: <span class="font-medium">{{ order.tableNumber }}</span>
         </div>
+        <div v-if="order.paymentMethod" class="text-sm text-gray-600 mb-1">
+          Payment: <span class="font-medium">{{ order.paymentMethod }}</span>
+        </div>
         <div class="text-sm text-gray-600 mb-4">
           Date: <span class="font-medium">{{ order.orderDate }}</span>
         </div>
